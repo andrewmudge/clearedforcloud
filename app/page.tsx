@@ -1,20 +1,15 @@
 import Image from "next/image";
 import profilePic from "@/public/profile.jpg";
+import HeaderWithToggle from "./components/HeaderWithToggle";
+
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-gray-100 font-sans">
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 py-4 shadow-lg bg-gray-900 border-b-4 border-red-800">
-      <div className="flex items-center text-xl font-bold tracking-widest text-white gap-2">
-    <img src="/jet2.svg" alt="Jet Icon" className="w-8 h-8" />Cleared for Cloud</div>
-        <nav className="space-x-6">
-          <a href="#about" className="hover:text-red-600 transition-colors">About</a>
-          <a href="#projects" className="hover:text-red-600 transition-colors">Projects</a>
-          <a href="#certifications" className="hover:text-red-600 transition-colors">Certifications</a>
-          <a href="#contact" className="hover:text-red-600 transition-colors">Contact</a>
-        </nav>
-      </header>
+      
+      {/* Header (Responsive with toggle) */}
+      <HeaderWithToggle />
+   
 
       {/* Hero */}
       <section className="py-20 px-4 bg-gradient-to-r from-red-900 via-gray-900 to-black">
@@ -62,19 +57,19 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 mt-8 mb-8 flex flex-col lg:flex-row gap-12">
 
         {/* About Section */}
-        <section id="about" className="flex-1 py-16 bg-gray-800 rounded-lg shadow-lg border border-red-700">
-        <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">
-          <span className="inline-flex items-center justify-center gap-2">
-            <img src="/jet2.svg" alt="Jet Icon" className="w-8 h-8 inline-block" />
-            Meet Andrew Mudge
-          </span>
-        </h2>
+        <section id="about" className="flex-1 py-16 bg-gray-800 rounded-lg shadow-lg border border-red-700 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">
+            <span className="inline-flex items-center justify-center gap-2">
+              <img src="/jet2.svg" alt="Jet Icon" className="w-8 h-8" />
+              Meet Andrew Mudge
+            </span>
+          </h2>
         <div className="w-full max-w-[1200px] mx-auto px-4 lg:px-6 flex flex-col gap-12">
           <div className="text-lg text-center text-gray-300">
             <p>
-            I’m a former U.S. Marine Corps F-35B pilot with 12 years of active duty service and over 800 flight hours, 
+            I’m a U.S. Marine Corps F-35B pilot with 12 years of active duty service and over 800 flight hours, 
             including combat operations. My career in aviation demanded precision, high-stakes decision-making, 
-            and systems-level thinking—skills I now apply to cloud architecture and infrastructure design.
+            and systems-level thinking, skills I now apply to cloud architecture and infrastructure design.
             </p>
             <p className="mt-4">Skills: AWS | Terraform | Python | Linux | DevOps | Cloud Security</p>
 
@@ -102,8 +97,8 @@ export default function Home() {
         {/* Certifications Section */}
         <section id="certifications" className="flex-1 py-16 bg-gray-800 rounded-lg shadow-lg border border-red-700">
           <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">☁️ Cloud Certifications</h2>
-          <ul className="text-center space-y-2 max-w-md mx-auto text-gray-300">
-            <li>AWS Certified Solutions Architect – Associate (in progress)</li>
+          <ul className="list-disc list-inside text-left space-y-2 max-w-md mx-auto text-gray-300 px-4">
+            <li>AWS Certified Solutions Architect Associate</li>
             <li>AWS Certified Security – Specialty (in progress)</li>
             <li>Google Cybersecurity Professional Certificate</li>
           </ul>
