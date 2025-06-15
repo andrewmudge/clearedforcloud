@@ -82,7 +82,7 @@ export default function Home() {
           <div className="mt-6 flex flex-col items-center gap-4">
 
             {/* Top Row: Email & Github */}
-            <div className="flex justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-center break-words">
               <a
                 href="mailto:mudge.andrew@gmail.com"
                 className="text-red-600 hover:underline flex items-center gap-2"
@@ -103,12 +103,12 @@ export default function Home() {
             
 
             {/* Bottom Row: Phone & LinkedIn */}
-            <div className="flex justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-center break-words">
                <a
                   href="tel:+16618080385"
                   className="text-red-600 hover:underline flex items-center gap-2"
                 >
-                  <span role="img" aria-label="Phone" className="text-white text-lg">📞</span>
+                  <span role="img" aria-label="Phone" className="text-white text-lg">📱</span>
                   +1 (661) 808-0385
                 </a>
               
