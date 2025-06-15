@@ -5,13 +5,13 @@ export default function ProjectsPage() {
       title: "Scalable Serverless Web App",
       description: (
         <>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             Built a fully serverless event booking system capable of handling thousands of concurrent requests with minimal latency.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> Traditional server-based apps required scaling and high maintenance for peak traffic. Serverless allowed automatic scaling and cost efficiency.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Architecture:</strong> Users authenticate with Cognito, submit bookings via a Next.js frontend. Requests hit API Gateway which invokes Lambda functions. Bookings are stored in DynamoDB. SES sends confirmation emails.
           </p>
           <p className="text-sm text-gray-400 mb-4">
@@ -32,13 +32,13 @@ export default function ProjectsPage() {
       title: "Multi-Tier Web App in a VPC",
       description: (
         <>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             Deployed a 3-tier Flask application inside a secure VPC, segmented by subnets and protected by security groups and NACLs.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> Needed isolation between app layers, secure DB access, and controlled internet exposure for the frontend only.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Architecture:</strong> Public subnet hosts ALB, which routes to EC2 app servers in private subnets. RDS PostgreSQL lives in isolated DB subnet. Bastion host enables SSH for admin.
           </p>
           <p className="text-sm text-gray-400 mb-4">
@@ -59,13 +59,13 @@ export default function ProjectsPage() {
       title: "CI/CD Pipeline with Infrastructure as Code",
       description: (
         <>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             Designed an automated blue/green deployment pipeline to eliminate downtime during updates.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> Manual deployments caused downtime and human error. Needed faster, safer delivery of updates.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Architecture:</strong> CodePipeline triggers on GitHub commits. Terraform provisions infra. CodeBuild compiles code, CodeDeploy handles traffic shift with rollback on failure.
           </p>
           <p className="text-sm text-gray-400 mb-4">
@@ -86,13 +86,13 @@ export default function ProjectsPage() {
       title: "Real-Time Cloud Security Dashboard",
       description: (
         <>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             Built a monitoring system for detecting suspicious behavior across AWS services and alerting in real-time.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> AWS accounts lacked centralized security visibility. Teams needed real-time alerts for misconfigurations and threats.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Architecture:</strong> GuardDuty and CloudTrail events trigger EventBridge rules. Lambda processes events and stores in DynamoDB. Custom frontend dashboard built with Next.js.
           </p>
           <p className="text-sm text-gray-400 mb-4">
@@ -113,13 +113,13 @@ export default function ProjectsPage() {
       title: "Global Content Delivery System",
       description: (
         <>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             Designed a globally available and resilient web content delivery system with failover across AWS regions.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> Needed low-latency access to content worldwide with disaster recovery capability.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-gray-200">
             <strong>Architecture:</strong> Content stored in S3 behind CloudFront distribution. Route 53 health checks perform automatic failover between active and standby S3 buckets in different regions.
           </p>
           <p className="text-sm text-gray-400 mb-4">
@@ -137,12 +137,14 @@ export default function ProjectsPage() {
     },
   ];
 
-  const summaryProjects = projects.map(({ year, title, techStack, externalLink }) => ({
-    year,
-    name: title,
-    techStack,
-    link: externalLink || "#",
-  }));
+  const summaryProjects = [...projects]
+    .sort((a, b) => Number(b.year) - Number(a.year))
+    .map(({ year, title, techStack, externalLink }) => ({
+      year,
+      name: title,
+      techStack,
+      link: externalLink || "#",
+    }));
 
   return (
     <section className="px-6 py-16 bg-gray-900 min-h-screen">
@@ -202,57 +204,57 @@ export default function ProjectsPage() {
       </div>
 
       {/* Summary Table Section */}
-      <h2
-        id="project-table"
-        className="text-3xl font-bold text-center mt-20 mb-8 text-red-500 tracking-wide"
-      >
-        All Projects
-      </h2>
+        <h2
+          id="project-table"
+          className="text-3xl font-bold text-center mt-20 mb-8 text-red-500 tracking-wide"
+        >
+          All Projects
+        </h2>
 
-      <div className="max-w-7xl mx-auto overflow-x-auto">
-        <table className="min-w-full border border-gray-700 rounded-lg overflow-hidden">
-          <thead className="bg-gray-800 text-gray-300">
-            <tr>
-              <th className="px-4 py-3 text-left">Year</th>
-              <th className="px-4 py-3 text-left">Project</th>
-              <th className="px-4 py-3 text-left">Tech Stack</th>
-              <th className="px-4 py-3 text-left">Link</th>
-            </tr>
-          </thead>
-          <tbody className="bg-gray-900 divide-y divide-gray-700 text-gray-200">
-            {summaryProjects.map((project, index) => (
-              <tr key={index} className="hover:bg-gray-800 transition-colors">
-                <td className="px-4 py-3">{project.year}</td>
-                <td className="px-4 py-3 font-medium">{project.name}</td>
-                <td className="px-4 py-3 space-x-2">
-                  {project.techStack.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="inline-block bg-red-700/20 text-red-400 text-xs font-semibold px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </td>
-                <td className="px-4 py-3">
-                  {project.link !== "#" ? (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-500 hover:underline"
-                    >
-                      View →
-                    </a>
-                  ) : (
-                    "—"
-                  )}
-                </td>
+        <div className="max-w-7xl mx-auto overflow-x-auto">
+          <table className="min-w-full border border-gray-700 rounded-lg overflow-hidden">
+            <thead className="bg-gray-800 text-gray-300">
+              <tr>
+                <th className="px-4 py-3 text-left">Year</th>
+                <th className="px-4 py-3 text-left">Project</th>
+                <th className="px-4 py-3 text-left">Link</th>
+                <th className="px-4 py-3 text-left">Tech Stack</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="bg-gray-900 divide-y divide-gray-700 text-gray-200">
+              {summaryProjects.map((project, index) => (
+                <tr key={index} className="hover:bg-gray-800 transition-colors">
+                  <td className="px-4 py-3">{project.year}</td>
+                  <td className="px-4 py-3 font-medium">{project.name}</td>
+                  <td className="px-4 py-3">
+                    {project.link !== "#" ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-500 hover:underline"
+                      >
+                        View →
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                  <td className="px-4 py-3 space-x-2">
+                    {project.techStack.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="inline-block bg-red-700/20 text-red-400 text-xs font-semibold px-2 py-1 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
     </section>
   );
 }
