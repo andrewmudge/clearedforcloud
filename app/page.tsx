@@ -11,47 +11,51 @@ export default function Home() {
       <HeaderWithToggle />
    
 
-      {/* Hero */}
-      <section className="py-20 px-4 bg-gradient-to-r from-red-900 via-gray-900 to-black">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
-          {/* Left: Larger Profile Image */}
-          <div className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden border-4 border-gray-900 shadow-lg flex-shrink-0">
-            <Image
-              src={profilePic}
-              alt="Andrew Mudge Headshot"
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-          </div>
+     {/* Hero */}
+<section className="py-20 px-4 bg-gradient-to-r from-red-900 via-gray-900 to-black">
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center mt-15 gap-10">
+    {/* Left: Larger Profile Image only */}
+    <div className="flex flex-col items-center">
+      <div className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden border-4 border-gray-900 shadow-lg flex-shrink-0">
+        <Image
+          src={profilePic}
+          alt="Andrew Mudge Headshot"
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
+      </div>
+      {/* Removed the three <p> tags here */}
+    </div>
 
-          {/* Right: Text Content with Centered Buttons Below */}
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide text-white drop-shadow-lg">
-              From Fighter Pilot to Cloud Architect
-            </h1>
-            <p className="text-xl max-w-xl mx-auto md:mx-0 mb-6 text-gray-300">
-              Bringing mission-focused precision, leadership, and systems thinking from the cockpit to the cloud.
-            </p>
+    {/* Right: Text Content with Centered Buttons Below */}
+    <div className="flex-1 text-center md:text-left">
+      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide text-white drop-shadow-lg">
+        From Fighter Pilot to Cloud Architect
+      </h1>
+      <p className="text-xl max-w-xl mx-auto md:mx-0 mb-6 text-gray-300">
+        Bringing mission-focused precision, leadership, and systems thinking from the cockpit to the cloud.
+      </p>
 
-            {/* Buttons aligned under the text content */}
-            <div className="flex justify-center md:justify-start space-x-4">
-              <a
-                href="/resume.pdf"
-                className="bg-red-700 text-white px-6 py-2 rounded shadow hover:bg-red-800 transition"
-              >
-                Download Resume
-              </a>
-              <a
-                href="#projects"
-                className="border border-red-700 text-red-700 px-6 py-2 rounded hover:bg-red-700 hover:text-white transition"
-              >
-                View Projects
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Buttons aligned under the text content */}
+      <div className="flex justify-center md:justify-start space-x-4">
+        <a
+          href="/resume.pdf"
+          className="bg-red-700 text-white px-6 py-2 rounded shadow hover:bg-red-800 transition"
+        >
+          Download Resume
+        </a>
+        <a
+          href="#projects"
+          className="border border-red-700 text-red-700 px-6 py-2 rounded hover:bg-red-700 hover:text-white transition"
+        >
+          View Projects
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* About & Certifications Container */}
       <div className="max-w-6xl mx-auto px-6 mt-8 mb-8 flex flex-col lg:flex-row gap-12">
@@ -71,25 +75,58 @@ export default function Home() {
             including combat operations. My career in aviation demanded precision, high-stakes decision-making, 
             and systems-level thinking, skills I now apply to cloud architecture and infrastructure design.
             </p>
-            <p className="mt-4">Skills: AWS | Terraform | Python | Linux | DevOps | Cloud Security</p>
+            <p className="mt-4"><b>Skills: </b>AWS | Terraform | Python | Linux | DevOps | Cloud Security</p>
 
             {/* Centered Horizontal Contact Links */}
-            <div className="mt-6 flex justify-center gap-6">
-              <a href="mailto:mudge.andrew@gmail.com" className="text-red-600 hover:underline flex items-center gap-2">
+            {/* Centered Contact Links */}
+          <div className="mt-6 flex flex-col items-center gap-4">
+
+            {/* Top Row: Email & Github */}
+            <div className="flex justify-center gap-8">
+              <a
+                href="mailto:mudge.andrew@gmail.com"
+                className="text-red-600 hover:underline flex items-center gap-2"
+              >
                 <img src="/gmail.png" alt="Email Icon" className="w-5 h-5" />
-                Email
+                mudge.andrew@gmail.com
               </a>
-              <a href="https://github.com/andrewmudge" className="text-red-600 hover:underline flex items-center gap-2">
+              <a
+                href="https://github.com/andrewmudge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 hover:underline flex items-center gap-2"
+              >
                 <img src="/github.png" alt="GitHub Icon" className="w-5 h-5" />
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/andrew-mudge-78274133a/" className="text-red-600 hover:underline flex items-center gap-2">
+              </div>
+            
+
+            {/* Bottom Row: Phone & LinkedIn */}
+            <div className="flex justify-center gap-8">
+               <a
+                  href="tel:+16618080385"
+                  className="text-red-600 hover:underline flex items-center gap-2"
+                >
+                  <span role="img" aria-label="Phone" className="text-white text-lg">📞</span>
+                  +1 (661) 808-0385
+                </a>
+              
+
+              <a
+                href="https://www.linkedin.com/in/andrew-mudge-78274133a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 hover:underline flex items-center gap-2"
+              >
                 <img src="/linkedin.png" alt="LinkedIn Icon" className="w-5 h-5" />
                 LinkedIn
               </a>
             </div>
+
           </div>
         </div>
+      </div>
       </section>
 
 
@@ -102,7 +139,7 @@ export default function Home() {
             <li>AWS Certified Security – Specialty (in progress)</li>
             <li>Google Cybersecurity Professional Certificate</li>
           </ul>
-          <h2 className="text-3xl font-bold text-center mt-6 mb-6 text-red-500 tracking-wide">🏫 Education</h2>
+          <h2 className="text-3xl font-bold text-center mt-15 mb-6 text-red-500 tracking-wide">🏫 Education</h2>
           <ul className="text-center space-y-2 max-w-md mx-auto text-gray-300">
             <li>Bachelors of Science - Mechanical Engineering</li>
             <li>San Diego State University, 2014</li>
@@ -111,27 +148,110 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Projects */}
-      <section id="projects" className="py-16 px-6 bg-gray-900">
-        <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">🛠️ Featured Projects</h2>
-        <div className="grid gap-8 max-w-4xl mx-auto">
-          <div className="p-4 border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300">
-            <h3 className="text-xl font-semibold text-red-400">FlightOps to CloudOps</h3>
-            <p>Migrated a legacy on-prem app to AWS using EC2, RDS, and ALB.</p>
-            <p className="text-sm text-gray-400">Tech: AWS, Terraform, GitHub Actions</p>
-          </div>
-          <div className="p-4 border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300">
-            <h3 className="text-xl font-semibold text-red-400">CloudSec Dashboard</h3>
-            <p>Real-time dashboard for AWS security monitoring using CloudWatch, Lambda, SNS.</p>
-            <p className="text-sm text-gray-400">Tech: CloudWatch, Python</p>
-          </div>
-          <div className="p-4 border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300">
-            <h3 className="text-xl font-semibold text-red-400">Serverless Briefing App</h3>
-            <p>Generates mission-style briefs from cloud APIs using a serverless architecture.</p>
-            <p className="text-sm text-gray-400">Tech: Next.js, Lambda, DynamoDB</p>
-          </div>
-        </div>
-      </section>
+{/* Projects */}
+<section id="projects" className="py-16 px-6 bg-gray-900">
+  <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">🛠️ Featured Projects</h2>
+
+  {/* Link to full projects page */}
+  <div className="text-center mb-8">
+    <a
+      href="/projects"
+      className="inline-block px-4 py-2 text-sm font-semibold text-red-400 border border-red-500 rounded hover:bg-red-500 hover:text-white transition duration-300"
+    >
+      View All Projects →
+    </a>
+  </div>
+
+  {/* Grid container */}
+  <div className="grid gap-8 max-w-6xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {/* Project Card 1 */}
+    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+      <div className="p-2">
+        <img
+          src="/project1.png"
+          alt="Scalable Serverless Web App"
+          className="w-full h-64 object-cover rounded"
+        />
+      </div>
+      <div className="p-4 flex flex-col justify-center flex-grow">
+        <h3 className="text-xl font-semibold text-red-400 mb-2">Scalable Serverless Web App</h3>
+        <p>Built an event booking system using fully serverless architecture with real-time email notifications and CI/CD pipelines.</p>
+        <p className="text-sm text-gray-400 mt-2">Tech: Next.js, API Gateway, Lambda, DynamoDB, SES, Cognito</p>
+      </div>
+    </div>
+
+    {/* Project Card 2 */}
+    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+      <div className="p-2">
+        <img
+          src="/project2.png"
+          alt="Multi-Tier Web App in a VPC"
+          className="w-full h-64 object-cover rounded"
+        />
+      </div>
+      <div className="p-4 flex flex-col justify-center flex-grow">
+        <h3 className="text-xl font-semibold text-red-400 mb-2">Multi-Tier Web App in a VPC</h3>
+        <p>Deployed a 3-tier Flask app using EC2, RDS, and ALB with secure private networking and a bastion host setup.</p>
+        <p className="text-sm text-gray-400 mt-2">Tech: EC2, ALB, RDS, VPC, S3, CloudWatch</p>
+      </div>
+    </div>
+
+    {/* Project Card 3 */}
+    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+      <div className="p-2">
+        <img
+          src="/project3.png"
+          alt="CI/CD Pipeline with IaC"
+          className="w-full h-64 object-cover rounded"
+        />
+      </div>
+      <div className="p-4 flex flex-col justify-center flex-grow">
+        <h3 className="text-xl font-semibold text-red-400 mb-2">CI/CD Pipeline with IaC</h3>
+        <p>Created a fully automated pipeline using CodePipeline and Terraform with blue/green deployments and secure secrets management.</p>
+        <p className="text-sm text-gray-400 mt-2">Tech: CodePipeline, Terraform, CodeBuild, CodeDeploy</p>
+      </div>
+    </div>
+
+    {/* Project Card 4 */}
+    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+      <div className="p-2">
+        <img
+          src="/project4.png"
+          alt="Real-Time Cloud Security Dashboard"
+          className="w-full h-64 object-cover rounded"
+        />
+      </div>
+      <div className="p-4 flex flex-col justify-center flex-grow">
+        <h3 className="text-xl font-semibold text-red-400 mb-2">Real-Time Cloud Security Dashboard</h3>
+        <p>Monitors AWS account for anomalies using GuardDuty and CloudTrail, visualized in a custom frontend with alerting.</p>
+        <p className="text-sm text-gray-400 mt-2">Tech: GuardDuty, EventBridge, Lambda, DynamoDB, Next.js</p>
+      </div>
+    </div>
+
+    {/* Project Card 5 */}
+    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+      <div className="p-2">
+        <img
+          src="/project5.png"
+          alt="Global Content Delivery System"
+          className="w-full h-64 object-cover rounded"
+        />
+      </div>
+      <div className="p-4 flex flex-col justify-center flex-grow">
+        <h3 className="text-xl font-semibold text-red-400 mb-2">Global Content Delivery System</h3>
+        <p>Delivered globally available website using CloudFront with S3 origin and Route 53 failover across AWS regions.</p>
+        <p className="text-sm text-gray-400 mt-2">Tech: CloudFront, S3, Route 53, Lambda, Terraform</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
 
 
       {/*  /////////////   Place Holder for Contact Section 
@@ -149,10 +269,7 @@ export default function Home() {
 
       //////////////////////*/}
 
-      {/* Footer */}
-      <footer className="text-center py-6 text-sm text-gray-400 bg-gray-900 border-t border-red-700">
-        © 2025 Andrew Mudge | ClearedForCloud.com · Built with Next.js · Deployed on AWS
-      </footer>
+     
     </main>
   );
 }
