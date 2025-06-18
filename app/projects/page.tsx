@@ -90,6 +90,10 @@ export default function ProjectsPage() {
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> EC2, RDS, Flask, VPC, Subnets, ALB, IAM, CloudWatch
           </p>
+          <p className="text-gray-300 mt-2">
+            <strong>Full Description:</strong>This project showcases my ability to ......
+            <br /><br />
+          </p>
         </>
       ),
       link: "/projects/multi-tier-web-app",
@@ -115,6 +119,10 @@ export default function ProjectsPage() {
           </p>
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> CodePipeline, CodeBuild, CodeDeploy, Terraform, GitHub, S3, IAM
+          </p>
+          <p className="text-gray-300 mt-2">
+            <strong>Full Description:</strong>This project showcases my ability to ......
+            <br /><br />
           </p>
         </>
       ),
@@ -142,7 +150,12 @@ export default function ProjectsPage() {
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> GuardDuty, CloudTrail, EventBridge, Lambda, DynamoDB, Next.js
           </p>
+          <p className="text-gray-300 mt-2">
+            <strong>Full Description:</strong>This project showcases my ability to ......
+            <br /><br />
+          </p>
         </>
+
       ),
       link: "/projects/cloud-security-dashboard",
       imgSrc: "/project4.png",
@@ -167,6 +180,10 @@ export default function ProjectsPage() {
           </p>
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> S3, CloudFront, Route 53, Lambda@Edge, IAM, Terraform
+          </p>
+          <p className="text-gray-300 mt-2">
+            <strong>Full Description:</strong>This project showcases my ability to ......
+            <br /><br />
           </p>
         </>
       ),
@@ -204,15 +221,16 @@ export default function ProjectsPage() {
 
       <div className="max-w-7xl mx-auto space-y-12">
         {projects.map(({ id, title, description, link, imgSrc, imgAlt, externalLink }) => (
-          <ExpandProject
-            key={id}
-            title={title}
-            description={description}
-            link={link}
-            imgSrc={imgSrc}
-            imgAlt={imgAlt}
-            externalLink={externalLink}
-          />
+          <div id={id.toString()} key={id}>
+            <ExpandProject
+              title={title}
+              description={description}
+              link={link}
+              imgSrc={imgSrc}
+              imgAlt={imgAlt}
+              externalLink={externalLink}
+            />
+          </div>
         ))}
       </div>
 

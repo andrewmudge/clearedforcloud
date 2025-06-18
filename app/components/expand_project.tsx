@@ -108,28 +108,30 @@ export default function ExpandProject({
             </a>
           )}
         </div>
+        {/* View More button below links */}
+        {more.length > 0 && (
+          <div className="mt-4 mx-auto">
+            <button
+              className="font-bold text-white border border-red-500 rounded px-6 py-2 hover:bg-red-600 transition"
+              onClick={() => setExpanded((v) => !v)}
+              type="button"
+            >
+              {expanded ? "View Less" : "View More"}
+            </button>
+          </div>
+        )}
       </div>
       {/* Image Section */}
-      <div className="hidden md:block mt-6 md:mt-0 flex-shrink-0">
-        <Image
-          src={imgSrc}
-          alt={imgAlt}
-          width={320} // or your preferred width
-          height={200} // or your preferred height
-          className="max-w-xs rounded-lg"
-          style={{ objectFit: "contain" }}
-        />
-      </div>
-      {/* View More centered absolutely at the bottom of the bordered card */}
-      {more.length > 0 && (
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-6 flex justify-center w-full pointer-events-none">
-          <button
-            className="pointer-events-auto font-bold text-white border border-red-500 rounded px-6 py-2 hover:bg-red-600 transition"
-            onClick={() => setExpanded((v) => !v)}
-            type="button"
-          >
-            {expanded ? "View Less" : "View More"}
-          </button>
+      {!expanded && (
+        <div className="hidden md:block mt-6 md:mt-0 flex-shrink-0">
+          <Image
+            src={imgSrc}
+            alt={imgAlt}
+            width={320} // or your preferred width
+            height={200} // or your preferred height
+            className="max-w-xs rounded-lg"
+            style={{ objectFit: "contain" }}
+          />
         </div>
       )}
     </div>

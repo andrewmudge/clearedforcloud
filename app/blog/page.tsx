@@ -6,64 +6,17 @@ const blogEntries = [
   {
     id: 1,
     title: "First Blog Post",
-    date: "2025-06-01",
+    date: "2025-06-18",
     body:
-      "Welcome to the first post of our blog! Here we discuss all things cloud, from the basics to advanced topics. Our goal is to help you navigate the ever-changing landscape of cloud computing. Whether you're a beginner or an experienced professional, you'll find valuable insights here. We'll cover best practices, share industry news, and provide hands-on tutorials. Stay tuned for regular updates and feel free to engage with us in the comments. Thank you for joining us on this journey into the cloud!",
+      "Welcome to the first post of My blog! Today I published this website as well as a draft of my first app. There first app I made was a serverless event booking system for a AWS tech weekend. It uses Cognito, DynamoDB, Lambda, API Gateway, SES, S3, and CloudFront. I will be adding more features to it in the future, but for now, it is a simple event booking system that allows users to book events and receive email notifications. This website is inetented to be a portfolio page for future employers to see my projects but I will also be posting things I've learned along the way so I can go back and reference for later",
   },
   {
     id: 2,
-    title: "Cloud Security Best Practices",
-    date: "2025-06-10",
-    body: "Security in the cloud is paramount. Here are some best practices...",
-  },
-  {
-    id: 3,
-    title: "Migrating to Azure",
-    date: "2025-06-15",
-    body: "Azure migration can be smooth with the right planning. Let's explore how.",
-  },
-  {
-    id: 4,
-    title: "Understanding AWS Pricing",
+    title: "Serverless Booking Project Improvement",
     date: "2025-06-18",
-    body: "AWS pricing can be complex. This post breaks down the basics for you.",
+    body: "I wasn't able to figure out how amplify v6 is used for auth. That was suggested but I kept running into errors. I also hard coded a secret ID for ease of developement. In an actual project this would have to be managed via AWS Secrets.",
   },
-  {
-    id: 5,
-    title: "Serverless Architectures Explained",
-    date: "2025-06-20",
-    body: "Serverless is changing the way we build apps. Learn the fundamentals here.",
-  },
-  {
-    id: 6,
-    title: "Kubernetes for Beginners",
-    date: "2025-06-22",
-    body: "Kubernetes can be intimidating. This guide will help you get started.",
-  },
-  {
-    id: 7,
-    title: "Multi-Cloud Strategies",
-    date: "2025-06-25",
-    body: "Should you use more than one cloud provider? Let's weigh the pros and cons.",
-  },
-  {
-    id: 8,
-    title: "CI/CD in the Cloud",
-    date: "2025-06-27",
-    body: "Continuous Integration and Deployment are easier than ever in the cloud.",
-  },
-  {
-    id: 9,
-    title: "Cost Optimization Tips",
-    date: "2025-06-29",
-    body: "Save money on your cloud bill with these practical tips.",
-  },
-  {
-    id: 10,
-    title: "Cloud Compliance Essentials",
-    date: "2025-07-01",
-    body: "Stay compliant in the cloud by following these essential guidelines.",
-  },
+
 ];
 
 // Highlight helper

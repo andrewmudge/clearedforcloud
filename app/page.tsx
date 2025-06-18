@@ -79,7 +79,7 @@ export default function Home() {
 
             {/* Centered Horizontal Contact Links */}
             {/* Centered Contact Links */}
-          <div className="mt-6 flex flex-col items-center gap-4">
+          <div className="mt-6 flex flex-col items-center gap-2 sm:gap-4">
 
             {/* Top Row: Email & Github */}
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-center break-words">
@@ -164,86 +164,106 @@ export default function Home() {
 
   {/* Grid container */}
   <div className="grid gap-8 max-w-6xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-    {/* Project Card 1 */}
-    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-      <div className="p-2">
+  {/* Project Card 1 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#1">
         <img
           src="/project1.png"
           alt="Scalable Serverless Web App"
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-contain rounded bg-gray-900"
         />
-      </div>
-      <div className="p-4 flex flex-col justify-center flex-grow">
-        <h3 className="text-xl font-semibold text-red-400 mb-2">Scalable Serverless Web App</h3>
-        <p>Built an event booking system using fully serverless architecture with real-time email notifications and CI/CD pipelines.</p>
-        <p className="text-sm text-gray-400 mt-2">Tech: Next.js, API Gateway, Lambda, DynamoDB, SES, Cognito</p>
-      </div>
+      </a>
     </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#1">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Scalable Serverless Web App</h3>
+      </a>
+      <p>Built an event booking system using fully serverless architecture with real-time email notifications and CI/CD pipelines.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: Next.js, API Gateway, Lambda, DynamoDB, SES, Cognito</p>
+    </div>
+  </div>
 
-    {/* Project Card 2 */}
-    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-      <div className="p-2">
+  {/* Project Card 2 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#2">
         <img
           src="/project2.png"
           alt="Multi-Tier Web App in a VPC"
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-contain rounded bg-gray-900"
         />
-      </div>
-      <div className="p-4 flex flex-col justify-center flex-grow">
-        <h3 className="text-xl font-semibold text-red-400 mb-2">Multi-Tier Web App in a VPC</h3>
-        <p>Deployed a 3-tier Flask app using EC2, RDS, and ALB with secure private networking and a bastion host setup.</p>
-        <p className="text-sm text-gray-400 mt-2">Tech: EC2, ALB, RDS, VPC, S3, CloudWatch</p>
-      </div>
+      </a>
     </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#2">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Multi-Tier Web App in a VPC</h3>
+      </a>
+      <p>Deployed a 3-tier Flask app using EC2, RDS, and ALB with secure private networking and a bastion host setup.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: EC2, ALB, RDS, VPC, S3, CloudWatch</p>
+    </div>
+  </div>
 
-    {/* Project Card 3 */}
-    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-      <div className="p-2">
+  {/* Project Card 3 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#3">
         <img
           src="/project3.png"
           alt="CI/CD Pipeline with IaC"
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-contain rounded bg-gray-900"
         />
-      </div>
-      <div className="p-4 flex flex-col justify-center flex-grow">
-        <h3 className="text-xl font-semibold text-red-400 mb-2">CI/CD Pipeline with IaC</h3>
-        <p>Created a fully automated pipeline using CodePipeline and Terraform with blue/green deployments and secure secrets management.</p>
-        <p className="text-sm text-gray-400 mt-2">Tech: CodePipeline, Terraform, CodeBuild, CodeDeploy</p>
-      </div>
+      </a>
     </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#3">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">CI/CD Pipeline with IaC</h3>
+      </a>
+      <p>Created a fully automated pipeline using CodePipeline and Terraform with blue/green deployments and secure secrets management.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: CodePipeline, Terraform, CodeBuild, CodeDeploy</p>
+    </div>
+  </div>
 
-    {/* Project Card 4 */}
-    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-      <div className="p-2">
+  {/* Project Card 4 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#4">
         <img
           src="/project4.png"
           alt="Real-Time Cloud Security Dashboard"
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-contain rounded bg-gray-900"
         />
-      </div>
-      <div className="p-4 flex flex-col justify-center flex-grow">
-        <h3 className="text-xl font-semibold text-red-400 mb-2">Real-Time Cloud Security Dashboard</h3>
-        <p>Monitors AWS account for anomalies using GuardDuty and CloudTrail, visualized in a custom frontend with alerting.</p>
-        <p className="text-sm text-gray-400 mt-2">Tech: GuardDuty, EventBridge, Lambda, DynamoDB, Next.js</p>
-      </div>
+      </a>
     </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#4">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Real-Time Cloud Security Dashboard</h3>
+      </a>
+      <p>Monitors AWS account for anomalies using GuardDuty and CloudTrail, visualized in a custom frontend with alerting.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: GuardDuty, EventBridge, Lambda, DynamoDB, Next.js</p>
+    </div>
+  </div>
 
-    {/* Project Card 5 */}
-    <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-      <div className="p-2">
+  {/* Project Card 5 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#5">
         <img
           src="/project5.png"
           alt="Global Content Delivery System"
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-contain rounded bg-gray-900"
         />
-      </div>
-      <div className="p-4 flex flex-col justify-center flex-grow">
-        <h3 className="text-xl font-semibold text-red-400 mb-2">Global Content Delivery System</h3>
-        <p>Delivered globally available website using CloudFront with S3 origin and Route 53 failover across AWS regions.</p>
-        <p className="text-sm text-gray-400 mt-2">Tech: CloudFront, S3, Route 53, Lambda, Terraform</p>
-      </div>
+      </a>
+    </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#5">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Global Content Delivery System</h3>
+      </a>
+      <p>Delivered globally available website using CloudFront with S3 origin and Route 53 failover across AWS regions.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: CloudFront, S3, Route 53, Lambda, Terraform</p>
     </div>
   </div>
+</div>
 </section>
 
 
