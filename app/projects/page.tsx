@@ -1,3 +1,5 @@
+import ExpandProject from "../components/expand_project";
+
 export default function ProjectsPage() {
   const projects = [
     {
@@ -16,6 +18,15 @@ export default function ProjectsPage() {
           </p>
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> Next.js, AWS Lambda, API Gateway, DynamoDB, SES, Cognito, S3, CloudWatch
+          </p>
+          <p className="text-gray-300 mt-2">
+            <strong>Full Description:</strong>This project showcases my ability to architect and deliver a robust, fully serverless web application for a technical conference platform. The solution enables users to securely register, authenticate, browse available lectures, manage event bookings, and receive automated confirmations—all within a highly available and scalable AWS environment.
+            <br /><br />
+            The frontend is built with Next.js, while AWS Lambda functions handle authentication via Cognito and all backend interactions with DynamoDB. Infrastructure is provisioned using Serverless Framework and AWS CloudFormation, ensuring repeatable and automated deployments. API Gateway orchestrates communication between the frontend and backend services. CI/CD is implemented with GitHub Actions, automating builds and deployments to S3, with global content delivery via CloudFront.
+            <br /><br />
+            The application flow is designed for both security and user experience: users register or log in, confirm their email, and are then presented with a dynamic events page. Lecture data is retrieved from DynamoDB, and users can book available sessions. Registrations are managed in a dedicated DynamoDB table, with logic to prevent duplicate bookings and enforce seat limits. Upon successful registration, users receive a confirmation email through AWS SES. Additionally, users can view their current registrations at any time.
+            <br /><br />
+            This project demonstrates my expertise in designing cloud-native, event-driven architectures, implementing secure authentication, automating infrastructure and deployments, and delivering production-ready solutions that address real-world business requirements.
           </p>
         </>
       ),
@@ -137,14 +148,13 @@ export default function ProjectsPage() {
     },
   ];
 
-  const summaryProjects = [...projects]
-    .sort((a, b) => Number(b.year) - Number(a.year))
-    .map(({ year, title, techStack, externalLink }) => ({
-      year,
-      name: title,
-      techStack,
-      link: externalLink || "#",
-    }));
+  // Prepare summaryProjects for the table
+  const summaryProjects = projects.map((project) => ({
+    year: project.year,
+    name: project.title,
+    link: project.externalLink || project.link || "#",
+    techStack: project.techStack,
+  }));
 
   return (
     <section className="px-6 py-16 bg-gray-900 min-h-screen">
@@ -162,44 +172,17 @@ export default function ProjectsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-12">
-        {projects.map(({ id, title, description, link, documentation, imgSrc, imgAlt }) => (
-          <div
+        {projects.map(({ id, title, description, link, documentation, imgSrc, imgAlt, externalLink }) => (
+          <ExpandProject
             key={id}
-            className="flex flex-col-reverse md:flex-row bg-gray-800 p-6 rounded-lg border border-red-700 shadow-md hover:border-red-500 transition"
-          >
-            {/* Text Section */}
-            <div className="flex-1 pr-0 md:pr-8 flex flex-col justify-between">
-              <div>
-                <h2 className="text-2xl text-red-400 font-bold mb-4">{title}</h2>
-                {description}
-              </div>
-              <div className="mt-4 space-x-6">
-                <a
-                  href={link}
-                  className="inline-block text-red-500 hover:underline font-semibold"
-                >
-                  Link
-                </a>
-                <a
-                  href={documentation}
-                  download
-                  className="inline-block text-red-500 hover:underline font-semibold"
-                >
-                  Documentation
-                </a>
-              </div>
-            </div>
-
-            {/* Image Section */}
-            <div className="hidden md:block mt-6 md:mt-0 flex-shrink-0">
-              <img
-                src={imgSrc}
-                alt={imgAlt}
-                className="max-w-xs rounded-lg"
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-          </div>
+            title={title}
+            description={description}
+            link={link}
+            documentation={documentation}
+            imgSrc={imgSrc}
+            imgAlt={imgAlt}
+            externalLink={externalLink}
+          />
         ))}
       </div>
 
