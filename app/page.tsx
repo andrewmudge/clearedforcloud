@@ -64,7 +64,7 @@ export default function Home() {
         <section id="about" className="flex-1 py-16 bg-gray-800 rounded-lg shadow-lg border border-red-700 px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">
             <span className="inline-flex items-center justify-center gap-2">
-              <img src="/jet2.svg" alt="Jet Icon" className="w-8 h-8" />
+              <Image src="/jet2.svg" alt="Jet Icon" width={32} height={32} className="w-8 h-8" />
               Meet Andrew Mudge
             </span>
           </h2>

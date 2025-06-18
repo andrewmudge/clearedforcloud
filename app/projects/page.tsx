@@ -1,4 +1,5 @@
 import ExpandProject from "../components/expand_project";
+import Image from "next/image";
 
 export default function ProjectsPage() {
   const projects = [
@@ -22,6 +23,41 @@ export default function ProjectsPage() {
           <p className="text-gray-300 mt-2">
             <strong>Full Description:</strong>This project showcases my ability to architect and deliver a robust, fully serverless web application for a technical conference platform. The solution enables users to securely register, authenticate, browse available lectures, manage event bookings, and receive automated confirmations—all within a highly available and scalable AWS environment.
             <br /><br />
+            <div className="w-full my-8">
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/booking_loginui.png"
+                    alt="Booking Login UI"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/booking_pre_login.png"
+                    alt="Booking Pre Login"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/booking_post_login.png"
+                    alt="Booking Post Login"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <br /><br />
             The frontend is built with Next.js, while AWS Lambda functions handle authentication via Cognito and all backend interactions with DynamoDB. Infrastructure is provisioned using Serverless Framework and AWS CloudFormation, ensuring repeatable and automated deployments. API Gateway orchestrates communication between the frontend and backend services. CI/CD is implemented with GitHub Actions, automating builds and deployments to S3, with global content delivery via CloudFront.
             <br /><br />
             The application flow is designed for both security and user experience: users register or log in, confirm their email, and are then presented with a dynamic events page. Lecture data is retrieved from DynamoDB, and users can book available sessions. Registrations are managed in a dedicated DynamoDB table, with logic to prevent duplicate bookings and enforce seat limits. Upon successful registration, users receive a confirmation email through AWS SES. Additionally, users can view their current registrations at any time.
@@ -31,7 +67,6 @@ export default function ProjectsPage() {
         </>
       ),
       link: "/projects/serverless-event-booking",
-      documentation: "/docs/serverless-event-booking.pdf",
       imgSrc: "/project1.png",
       imgAlt: "Serverless Event Booking Architecture Diagram",
       year: "2025",
@@ -58,7 +93,6 @@ export default function ProjectsPage() {
         </>
       ),
       link: "/projects/multi-tier-web-app",
-      documentation: "/docs/multi-tier-web-app.pdf",
       imgSrc: "/project2.png",
       imgAlt: "Multi-Tier VPC Architecture Diagram",
       year: "2024",
@@ -85,7 +119,6 @@ export default function ProjectsPage() {
         </>
       ),
       link: "/projects/cicd-pipeline-iac",
-      documentation: "/docs/cicd-pipeline-iac.pdf",
       imgSrc: "/project3.png",
       imgAlt: "CI/CD Pipeline Architecture Diagram",
       year: "2023",
@@ -112,7 +145,6 @@ export default function ProjectsPage() {
         </>
       ),
       link: "/projects/cloud-security-dashboard",
-      documentation: "/docs/cloud-security-dashboard.pdf",
       imgSrc: "/project4.png",
       imgAlt: "Cloud Security Dashboard UI",
       year: "2024",
@@ -139,7 +171,6 @@ export default function ProjectsPage() {
         </>
       ),
       link: "/projects/global-content-delivery",
-      documentation: "/docs/global-content-delivery.pdf",
       imgSrc: "/project5.png",
       imgAlt: "Global CDN Architecture Diagram",
       year: "2023",
@@ -172,13 +203,12 @@ export default function ProjectsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-12">
-        {projects.map(({ id, title, description, link, documentation, imgSrc, imgAlt, externalLink }) => (
+        {projects.map(({ id, title, description, link, imgSrc, imgAlt, externalLink }) => (
           <ExpandProject
             key={id}
             title={title}
             description={description}
             link={link}
-            documentation={documentation}
             imgSrc={imgSrc}
             imgAlt={imgAlt}
             externalLink={externalLink}
