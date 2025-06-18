@@ -9,7 +9,6 @@ interface ExpandProjectProps {
   imgSrc: string;
   imgAlt: string;
   externalLink?: string;
-  defaultCollapsedHeight?: number; // px
 }
 
 export default function ExpandProject({
@@ -19,7 +18,6 @@ export default function ExpandProject({
   imgSrc,
   imgAlt,
   externalLink,
-  defaultCollapsedHeight = 384, // 24rem
 }: ExpandProjectProps) {
   const [expanded, setExpanded] = useState(false);
 
@@ -27,32 +25,46 @@ export default function ExpandProject({
   const descArray = Children.toArray(description);
 
   // Find the index of the <p> that contains "Tech Stack"
-  const techStackIdx = descArray.findIndex((el: any) => {
+  const techStackIdx = descArray.findIndex((el: React.ReactNode) => {
     // Check for <strong>Tech Stack:</strong> or just "Tech Stack"
-    if (el?.props?.children) {
+    if (
+      typeof el === "object" &&
+      el !== null &&
+      "props" in el &&
+      (el as { props?: { children?: React.ReactNode | React.ReactNode[] } }).props?.children
+    ) {
+      const children = (el as { props: { children: React.ReactNode | React.ReactNode[] } }).props.children;
       // If children is an array, check each child
-      if (Array.isArray(el.props.children)) {
-        return el.props.children.some(
-          (child: any) =>
+      if (Array.isArray(children)) {
+        return children.some(
+          (child: React.ReactNode) =>
             (typeof child === "string" &&
               child.toLowerCase().includes("tech stack")) ||
-            (child?.props?.children &&
-              typeof child.props.children === "string" &&
-              child.props.children.toLowerCase().includes("tech stack"))
+            (typeof child === "object" &&
+              child !== null &&
+              "props" in child &&
+              typeof (child as { props?: { children?: React.ReactNode } }).props?.children === "string" &&
+              ((child as { props: { children: string } }).props.children)
+                .toLowerCase()
+                .includes("tech stack"))
         );
       }
       // If children is a string
       if (
-        typeof el.props.children === "string" &&
-        el.props.children.toLowerCase().includes("tech stack")
+        typeof children === "string" &&
+        children.toLowerCase().includes("tech stack")
       ) {
         return true;
       }
       // If children is a React element (e.g., <strong>Tech Stack:</strong>)
       if (
-        el.props.children?.props?.children &&
-        typeof el.props.children.props.children === "string" &&
-        el.props.children.props.children.toLowerCase().includes("tech stack")
+        typeof children === "object" &&
+        children !== null &&
+        "props" in children &&
+        typeof (children as { props?: { children?: React.ReactNode } }).props?.children === "string" &&
+        ((children as { props: { children: string } }).props.children)
+          .toLowerCase()
+          .includes("tech stack")
       ) {
         return true;
       }

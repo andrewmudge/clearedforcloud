@@ -66,12 +66,12 @@ export default function ProjectsPage() {
           </p>
         </>
       ),
-      link: "/projects/serverless-event-booking",
+      link: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/",
       imgSrc: "/project1.png",
       imgAlt: "Serverless Event Booking Architecture Diagram",
       year: "2025",
       techStack: ["Next.js", "AWS Lambda", "API Gateway", "DynamoDB", "SES", "Cognito", "S3", "CloudWatch"],
-      externalLink: "https://github.com/andrewmudge/serverless-event-booking",
+      externalLink: "https://github.com/andrewmudge/serverless_booking",
     },
     {
       id: 2,
