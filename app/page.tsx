@@ -31,7 +31,7 @@ export default function Home() {
     {/* Right: Text Content with Centered Buttons Below */}
     <div className="flex-1 text-center md:text-left">
       <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide text-white drop-shadow-lg">
-        From Fighter Pilot to Cloud Architect
+        From Fighter Pilot to Cloud Professional
       </h1>
       <p className="text-xl max-w-xl mx-auto md:mx-0 mb-6 text-gray-300">
         Bringing mission-focused precision, leadership, and systems thinking from the cockpit to the cloud.
