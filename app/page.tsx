@@ -40,7 +40,8 @@ export default function Home() {
       {/* Buttons aligned under the text content */}
       <div className="flex justify-center md:justify-start space-x-4">
         <a
-          href="/resume.pdf"
+          href="/Resume.pdf"
+          download
           className="bg-red-700 text-white px-6 py-2 rounded shadow hover:bg-red-800 transition"
         >
           Download Resume
