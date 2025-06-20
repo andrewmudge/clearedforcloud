@@ -5,7 +5,7 @@ export default function ProjectsPage() {
   const projects = [
     {
       id: 1,
-      title: "Scalable Serverless Web App",
+      title: "Scalable Serverless Event Booking System",
       description: (
         <>
           <p className="mb-2 text-gray-200">
@@ -31,7 +31,7 @@ export default function ProjectsPage() {
                     alt="Booking Login UI"
                     width={500}
                     height={320}
-                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
                     style={{ maxWidth: "100%", height: "auto" }}
                   />
                 </div>
@@ -41,14 +41,44 @@ export default function ProjectsPage() {
                     alt="Booking Pre Login"
                     width={500}
                     height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <br /><br />
+            The frontend is built with Next.js, while AWS Lambda functions handle authentication via Cognito and all backend interactions with DynamoDB. Infrastructure is provisioned using Serverless Framework and AWS CloudFormation, ensuring repeatable and automated deployments. API Gateway orchestrates communication between the frontend and backend services. CI/CD is implemented with GitHub Actions, automating builds and deployments to S3.
+            <br /><br />
+               <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/github_actions.png"
+                    alt="Github Actions CI/CD"
+                    width={500}
+                    height={320}
                     className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+            <br /><br />
+            The application flow is designed for both security and user experience: users register or log in, confirm their email, and are then presented with a dynamic events page. Lecture data is retrieved from DynamoDB, and users can book available sessions. Registrations are managed in a dedicated DynamoDB table, with logic to prevent duplicate bookings and enforce seat limits. Upon successful registration, users receive a confirmation email through AWS SES. Additionally, users can view their current registrations at any time.
+            <br /><br />
+              <div className="w-full my-8">
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/booking_post_login.png"
+                    alt="Booking Post Login"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
                     style={{ maxWidth: "100%", height: "auto" }}
                   />
                 </div>
                 <div className="flex-1 flex justify-center">
                   <Image
-                    src="/booking_post_login.png"
-                    alt="Booking Post Login"
+                    src="/booking_email.png"
+                    alt="booking email confirmation"
                     width={500}
                     height={320}
                     className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
@@ -57,10 +87,6 @@ export default function ProjectsPage() {
                 </div>
               </div>
             </div>
-            <br /><br />
-            The frontend is built with Next.js, while AWS Lambda functions handle authentication via Cognito and all backend interactions with DynamoDB. Infrastructure is provisioned using Serverless Framework and AWS CloudFormation, ensuring repeatable and automated deployments. API Gateway orchestrates communication between the frontend and backend services. CI/CD is implemented with GitHub Actions, automating builds and deployments to S3, with global content delivery via CloudFront.
-            <br /><br />
-            The application flow is designed for both security and user experience: users register or log in, confirm their email, and are then presented with a dynamic events page. Lecture data is retrieved from DynamoDB, and users can book available sessions. Registrations are managed in a dedicated DynamoDB table, with logic to prevent duplicate bookings and enforce seat limits. Upon successful registration, users receive a confirmation email through AWS SES. Additionally, users can view their current registrations at any time.
             <br /><br />
             This project demonstrates my expertise in designing cloud-native, event-driven architectures, implementing secure authentication, automating infrastructure and deployments, and delivering production-ready solutions that address real-world business requirements.
           </p>
