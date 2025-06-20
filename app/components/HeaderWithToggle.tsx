@@ -63,7 +63,7 @@ export default function HeaderWithToggle() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <nav className="absolute top-16 left-0 w-full bg-gray-900 text-center flex flex-col space-y-4 py-4 border-t border-red-800 md:hidden z-50">
+          <nav className="absolute top-16 left-0 w-full bg-gray-900 text-white text-center flex flex-col space-y-4 py-4 border-t border-red-800 md:hidden z-50">
             <Link
               href="/#about"
               className="hover:text-red-600 transition-colors"
