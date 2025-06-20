@@ -3,19 +3,20 @@ import React, { useState } from "react";
 
 // Expanded sample blog data
 const blogEntries = [
+    {
+    id: 2,
+    title: "Serverless Booking Project Improvement",
+    date: "2025-06-19",
+    body: "I wasn't able to figure out how amplify v6 is used for auth. That was suggested but I kept running into errors. I also hard coded a secret ID for ease of developement. In an actual project this would have to be managed via AWS Secrets. In an effort to keep learning I am acknowledging this error and continuing. Some big lessons learned for me were how valuable CI/CD is. It’s great to make a change, see it in local host and immediately get it to the web with 3 lines of CLI code with GitHub or GitHub actions. Some big errors I ran into was github actions failing the build. Use npm run build to check it locally before sending it for a workflow. Holistically when tackling a project think more about the best way to do it instead of jumping in blind with one component",
+  },
   {
     id: 1,
     title: "First Blog Post",
     date: "2025-06-18",
     body:
-      "Welcome to the first post of My blog! Today I published this website as well as a draft of my first app. There first app I made was a serverless event booking system for a AWS tech weekend. It uses Cognito, DynamoDB, Lambda, API Gateway, SES, S3, and CloudFront. I will be adding more features to it in the future, but for now, it is a simple event booking system that allows users to book events and receive email notifications. This website is inetented to be a portfolio page for future employers to see my projects but I will also be posting things I've learned along the way so I can go back and reference for later",
+      "Welcome to the first post of My blog! Today I published this website as well as a draft of my first app. There first app I made was a serverless event booking system for a AWS tech weekend. It uses Cognito, DynamoDB, Lambda, API Gateway, SES, S3. I will be adding more features to it in the future, but for now, it is a simple event booking system that allows users to book events and receive email notifications.\n\nThis website is intended to be a portfolio page for future employers to see my projects but I will also be posting things I've learned along the way so I can go back and reference for later",
   },
-  {
-    id: 2,
-    title: "Serverless Booking Project Improvement",
-    date: "2025-06-18",
-    body: "I wasn't able to figure out how amplify v6 is used for auth. That was suggested but I kept running into errors. I also hard coded a secret ID for ease of developement. In an actual project this would have to be managed via AWS Secrets.",
-  },
+
 
 ];
 
@@ -87,21 +88,15 @@ const BlogPage: React.FC = () => {
               position: "relative",
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                top: 24,
-                right: 24,
-                color: "#888",
-                fontSize: 14,
-              }}
-            >
-              {new Date(entry.date).toLocaleDateString()}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0">
+              <span className="text-gray-400 text-sm">
+                {new Date(entry.date).toLocaleDateString()}
+              </span>
+              <h2 className="font-bold text-black text-xl">
+                {highlightText(entry.title, search)}
+              </h2>
             </div>
-            <h2 style={{ marginTop: 0, color: "#000", fontSize: 28 }}>
-              {highlightText(entry.title, search)}
-            </h2>
-            <p style={{ marginBottom: 0, color: "#000", fontSize: 18 }}>
+            <p style={{ marginBottom: 0, color: "#000", fontSize: 18, whiteSpace: "pre-line" }}>
               {highlightText(entry.body, search)}
             </p>
           </div>
