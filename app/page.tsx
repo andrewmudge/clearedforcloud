@@ -136,9 +136,9 @@ export default function Home() {
         <section id="certifications" className="flex-1 py-16 bg-gray-800 rounded-lg shadow-lg border border-red-700">
           <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">☁️ Cloud Certifications</h2>
           <ul className="list-disc list-inside text-left space-y-2 max-w-md mx-auto text-gray-300 px-4">
-            <li>AWS Certified Solutions Architect Associate</li>
+            <li>AWS Certified Solutions Architect Associate (in progress)</li>
             <li>AWS Certified Security – Specialty (in progress)</li>
-            <li>Google Cybersecurity Professional Certificate</li>
+            <li>Google Cybersecurity Professional Certificate - Feb 2025</li>
           </ul>
           <h2 className="text-3xl font-bold text-center mt-15 mb-6 text-red-500 tracking-wide">🏫 Education</h2>
           <ul className="text-center space-y-2 max-w-md mx-auto text-gray-300">

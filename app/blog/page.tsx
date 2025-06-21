@@ -1,26 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-// Expanded sample blog data
-const blogEntries = [
-    {
-    id: 2,
-    title: "Serverless Booking Project Improvement",
-    date: "2025-06-19",
-    body: "I wasn't able to figure out how amplify v6 is used for auth. That was suggested but I kept running into errors. I also hard coded a secret ID for ease of developement. In an actual project this would have to be managed via AWS Secrets. In an effort to keep learning I am acknowledging this error and continuing. Some big lessons learned for me were how valuable CI/CD is. It’s great to make a change, see it in local host and immediately get it to the web with 3 lines of CLI code with GitHub or GitHub actions. Some big errors I ran into was github actions failing the build. Use npm run build to check it locally before sending it for a workflow. Holistically when tackling a project think more about the best way to do it instead of jumping in blind with one component",
-  },
-  {
-    id: 1,
-    title: "First Blog Post",
-    date: "2025-06-18",
-    body:
-      "Welcome to the first post of My blog! Today I published this website as well as a draft of my first app. There first app I made was a serverless event booking system for a AWS tech weekend. It uses Cognito, DynamoDB, Lambda, API Gateway, SES, S3. I will be adding more features to it in the future, but for now, it is a simple event booking system that allows users to book events and receive email notifications.\n\nThis website is intended to be a portfolio page for future employers to see my projects but I will also be posting things I've learned along the way so I can go back and reference for later",
-  },
+type BlogEntry = {
+  id: string;
+  title: string;
+  date: string;
+  category: string;
+  image?: string;
+  body: string;
+};
 
-
-];
-
-// Highlight helper
 function highlightText(text: string, query: string) {
   if (!query) return text;
   const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
@@ -36,96 +26,286 @@ function highlightText(text: string, query: string) {
   );
 }
 
+function getReadTime(text: string = "") {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+function getExcerpt(text: string = "", maxSentences = 2) {
+  const sentences = text.match(/[^.!?]+[.!?]+[\])'"`’”]*|.+/g) || [];
+  return sentences.slice(0, maxSentences).join(" ");
+}
+
+// Client-only date formatting to avoid hydration errors
+function BlogDate({ date }: { date: string }) {
+  const [formatted, setFormatted] = useState(date);
+  useEffect(() => {
+    setFormatted(
+      new Date(date).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).toUpperCase()
+    );
+  }, [date]);
+  return <>{formatted}</>;
+}
+
 const BlogPage: React.FC = () => {
   const [search, setSearch] = useState("");
+  const [blogEntries, setBlogEntries] = useState<BlogEntry[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [newPost, setNewPost] = useState({
+    category: "",
+    title: "",
+    image: "",
+    body: "",
+  });
+  const [expanded, setExpanded] = useState<{ [id: string]: boolean }>({});
+  const { data: session } = useSession();
+  const isOwner = session?.user?.email === "mudge.andrew@gmail.com";
 
-  const filteredEntries = blogEntries.filter(
-    (entry) =>
-      entry.title.toLowerCase().includes(search.toLowerCase()) ||
-      entry.body.toLowerCase().includes(search.toLowerCase())
-  );
+  // Fetch blog posts from DynamoDB via API route
+  useEffect(() => {
+    fetch("/api/blog")
+      .then((res) => res.json())
+      .then(setBlogEntries);
+  }, []);
+
+  // Handle form input changes
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setNewPost((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submit
+  const handleAddPost = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!newPost.title || !newPost.body) return;
+    const res = await fetch("/api/blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
+    });
+    const saved = await res.json();
+    setBlogEntries([saved, ...blogEntries]);
+    setShowModal(false);
+    setNewPost({ category: "", title: "", image: "", body: "" });
+  };
+
+  const filteredEntries = blogEntries
+    .slice()
+    .sort((a, b) => {
+      if (a.date !== b.date) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      }
+      return Number(b.id) - Number(a.id);
+    })
+    .filter(
+      (entry) =>
+        (entry.title?.toLowerCase() || "").includes(search.toLowerCase()) ||
+        (entry.body?.toLowerCase() || "").includes(search.toLowerCase())
+    );
 
   return (
-    <div
-      style={{
-        maxWidth: 700,
-        margin: "0 auto",
-        padding: 24,
-        overflowY: "auto",
-        boxSizing: "border-box",
-        background: "#fff",
-      }}
-    >
-      <h1 style={{ textAlign: "center" }}>Blog</h1>
-      <input
-        type="text"
-        placeholder="Search blog..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          width: "100%",
-          padding: 10,
-          marginBottom: 24,
-          fontSize: 16,
-          borderRadius: 6,
-          border: "1px solid #ccc",
-          color: "#000",
-        }}
-      />
-      <div>
-        {filteredEntries.length === 0 && (
-          <p style={{ textAlign: "center", color: "#888" }}>No entries found.</p>
-        )}
-        {filteredEntries.map((entry, idx) => (
-          <div
-            key={entry.id}
-            style={{
-              background: "#f9f9f9",
-              borderRadius: 8,
-              marginBottom: idx === filteredEntries.length - 1 ? 0 : 24,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-              padding: 24,
-              position: "relative",
-            }}
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black">
+      {/* Blog Title */}
+      <div className="max-w-7xl mx-auto px-4 pt-24 pb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide text-center drop-shadow-lg">
+          BLOG
+        </h1>
+        <h2 className="text-lg md:text-xl text-gray-300 text-center mt-2 mb-2 font-medium">
+          Logging the journey from fighter pilot to cloud professional
+        </h2>
+        <div className="mx-auto mt-2 mb-6 w-24 h-1 bg-red-700 rounded"></div>
+      </div>
+
+      {/* Search Bar and Add Post Button */}
+      <div className="max-w-7xl mx-auto px-4 pt-2 pb-2 flex flex-col md:flex-row md:items-center gap-2">
+        <input
+          type="text"
+          placeholder="Search blog..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full md:w-1/2 px-4 py-2 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+        />
+        {isOwner ? (
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0">
-              <span className="text-gray-400 text-sm">
-                {new Date(entry.date).toLocaleDateString()}
-              </span>
-              <h2 className="font-bold text-black text-xl">
-                {highlightText(entry.title, search)}
-              </h2>
-            </div>
-            <p style={{ marginBottom: 0, color: "#000", fontSize: 18, whiteSpace: "pre-line" }}>
-              {highlightText(entry.body, search)}
-            </p>
+            + Add Post
+          </button>
+        ) : (
+          <button
+            onClick={() => signIn("google")}
+            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
+          >
+            Sign In
+          </button>
+        )}
+        {session && (
+          <button
+            onClick={() => signOut()}
+            className="ml-2 text-xs text-gray-400 underline"
+          >
+            Sign out
+          </button>
+        )}
+      </div>
+
+      {/* Add Post Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+          <div className="bg-gray-900 rounded-lg shadow-lg p-8 w-full max-w-lg relative">
+            <button
+              className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold text-white mb-4">Add New Blog Post</h2>
+            <form onSubmit={handleAddPost} className="space-y-4">
+              <div>
+                <label className="block text-gray-300 mb-1">Category</label>
+                <input
+                  type="text"
+                  name="category"
+                  value={newPost.category}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
+                  placeholder="e.g. Projects, Blog"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-300 mb-1">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
+                  placeholder="Blog post title"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-300 mb-1">Cover Image URL</label>
+                <input
+                  type="text"
+                  name="image"
+                  value={newPost.image}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
+                  placeholder="/project1.png or https://..."
+                />
+              </div>
+              <div>
+                <label className="block text-gray-300 mb-1">Body</label>
+                <textarea
+                  name="body"
+                  value={newPost.body}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
+                  rows={6}
+                  placeholder="Write your blog post here..."
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition w-full"
+              >
+                Add Post
+              </button>
+            </form>
           </div>
-        ))}
+        </div>
+      )}
+
+      {/* Blog Grid */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredEntries.map((entry) => {
+            const isExpanded = expanded[entry.id];
+            const safeBody = entry.body || "";
+            const excerpt = getExcerpt(safeBody, 2);
+            const needsExpand = safeBody.trim() !== excerpt.trim();
+
+            return (
+              <div
+                key={entry.id}
+                className="bg-[#23272b] rounded-lg shadow p-8 flex flex-col h-full"
+              >
+                <span className="uppercase text-blue-400 text-xs font-semibold mb-2 tracking-wider">
+                  {entry.category || "Archives"}
+                </span>
+                {entry.image && (
+                  <img
+                    src={entry.image}
+                    alt={entry.title}
+                    className="w-full h-48 object-contain rounded mb-4 border border-gray-700 bg-black"
+                  />
+                )}
+                <h2 className="text-2xl font-bold text-white mb-2 leading-tight">
+                  {highlightText(entry.title, search)}
+                </h2>
+                <p
+                  className="text-gray-300 mb-6 text-base"
+                  style={{ minHeight: 80, whiteSpace: "pre-line" }}
+                >
+                  {highlightText(isExpanded ? entry.body : excerpt, search)}
+                  {needsExpand && (
+                    <>
+                      {" "}
+                      {isExpanded ? (
+                        <button
+                          onClick={() =>
+                            setExpanded((prev) => ({ ...prev, [entry.id]: false }))
+                          }
+                          className="text-red-400 underline ml-1 text-sm"
+                        >
+                          View Less
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            setExpanded((prev) => ({ ...prev, [entry.id]: true }))
+                          }
+                          className="text-red-400 underline ml-1 text-sm"
+                        >
+                          View More
+                        </button>
+                      )}
+                    </>
+                  )}
+                </p>
+                <div className="flex items-center mt-auto">
+                  <img
+                    src="/profile.jpg"
+                    alt="Andrew Mudge"
+                    className="w-8 h-8 rounded-full mr-3 border-2 border-gray-700"
+                  />
+                  <div>
+                    <div className="text-xs text-gray-300 font-semibold">ANDREW MUDGE</div>
+                    <div className="text-xs text-gray-400 flex items-center gap-2">
+                      <BlogDate date={entry.date} />
+                      <span className="mx-1">•</span>
+                      {getReadTime(entry.body || "")} MIN READ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 };
 
-const Header = () => (
-  <header style={{ padding: "16px 0", textAlign: "center", background: "#f1f1f1" }}>
-    <h1 style={{ margin: 0, fontSize: 24 }}>My Blog</h1>
-  </header>
-);
-
-const Footer = () => (
-  <footer style={{ padding: "16px 0", textAlign: "center", background: "#f1f1f1" }}>
-    <p style={{ margin: 0, fontSize: 14 }}>© 2025 My Blog. All rights reserved.</p>
-  </footer>
-);
-
-const App = () => (
-  <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-    <Header />
-    <main style={{ flex: 1 }}>
-      <BlogPage />
-    </main>
-    <Footer />
-  </div>
-);
-
-export default App;
+export default BlogPage;
