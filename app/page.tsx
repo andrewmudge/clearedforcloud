@@ -88,7 +88,7 @@ export default function Home() {
                 href="mailto:mudge.andrew@gmail.com"
                 className="text-red-600 hover:underline flex items-center gap-2"
               >
-                <img src="/gmail.png" alt="Email Icon" className="w-5 h-5" />
+                <Image src="/gmail.png" alt="Email Icon" width={20} height={20} className="w-5 h-5" />
                 mudge.andrew@gmail.com
               </a>
               <a
@@ -97,7 +97,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-red-600 hover:underline flex items-center gap-2"
               >
-                <img src="/github.png" alt="GitHub Icon" className="w-5 h-5" />
+                <Image src="/github.png" alt="GitHub Icon" width={20} height={20} className="w-5 h-5" />
                 GitHub
               </a>
               </div>
@@ -120,7 +120,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-red-600 hover:underline flex items-center gap-2"
               >
-                <img src="/linkedin.png" alt="LinkedIn Icon" className="w-5 h-5" />
+                <Image src="/linkedin.png" alt="LinkedIn Icon" width={20} height={20} className="w-5 h-5" />
                 LinkedIn
               </a>
             </div>
@@ -169,9 +169,11 @@ export default function Home() {
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#1">
-        <img
+        <Image
           src="/project1.png"
           alt="Scalable Serverless Web App"
+          width={600}
+          height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
         />
       </a>
@@ -189,9 +191,11 @@ export default function Home() {
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#2">
-        <img
+        <Image
           src="/project2.png"
           alt="Multi-Tier Web App in a VPC"
+          width={600}
+          height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
         />
       </a>
@@ -209,9 +213,11 @@ export default function Home() {
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#3">
-        <img
+        <Image
           src="/project3.png"
           alt="CI/CD Pipeline with IaC"
+          width={600}
+          height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
         />
       </a>
@@ -229,9 +235,11 @@ export default function Home() {
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#4">
-        <img
+        <Image
           src="/project4.png"
           alt="Real-Time Cloud Security Dashboard"
+          width={600}
+          height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
         />
       </a>
@@ -249,9 +257,11 @@ export default function Home() {
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#5">
-        <img
+        <Image
           src="/project5.png"
           alt="Global Content Delivery System"
+          width={600}
+          height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
         />
       </a>

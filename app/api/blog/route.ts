@@ -1,8 +1,7 @@
-import { getServerSession } from "next-auth/next";
-import authOptions from "../auth/authOptions";
 import { NextRequest, NextResponse } from "next/server";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, ScanCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import jwt from "jsonwebtoken";
 
 const client = new DynamoDBClient({ region: "us-east-1" });
 const ddb = DynamoDBDocumentClient.from(client);
@@ -13,10 +12,19 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user || session.user.email !== "mudge.andrew@gmail.com") {
+  // Check for valid cookie
+  const cookie = req.cookies.get("blog_auth")?.value;
+  if (!cookie) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  try {
+    const payload = jwt.verify(cookie, process.env.COOKIE_SECRET!) as { email: string };
+    if (payload.email !== "mudge.andrew@gmail.com") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
   const body = await req.json();
   const item = {
     ...body,

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import Image from "next/image";
 
 type BlogEntry = {
   id: string;
@@ -66,7 +67,11 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     fetch("/api/blog")
       .then((res) => res.json())
-      .then(setBlogEntries);
+      .then(setBlogEntries)
+      .catch((err) => {
+        console.error("Failed to fetch blog posts:", err);
+        setBlogEntries([]);
+      });
   }, []);
 
   // Handle form input changes
@@ -225,9 +230,11 @@ const BlogPage: React.FC = () => {
                   {entry.category || "Archives"}
                 </span>
                 {entry.image && (
-                  <img
+                  <Image
                     src={entry.image}
                     alt={entry.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-contain rounded mb-4 border border-gray-700 bg-black"
                   />
                 )}
@@ -265,9 +272,11 @@ const BlogPage: React.FC = () => {
                   )}
                 </p>
                 <div className="flex items-center mt-auto">
-                  <img
+                  <Image
                     src="/profile.jpg"
                     alt="Andrew Mudge"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full mr-3 border-2 border-gray-700"
                   />
                   <div>
