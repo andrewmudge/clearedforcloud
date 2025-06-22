@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 type BlogEntry = {
   id: string;
@@ -62,8 +61,6 @@ const BlogPage: React.FC = () => {
     body: "",
   });
   const [expanded, setExpanded] = useState<{ [id: string]: boolean }>({});
-  const { data: session } = useSession();
-  const isOwner = session?.user?.email === "mudge.andrew@gmail.com";
 
   // Fetch blog posts from DynamoDB via API route
   useEffect(() => {
@@ -132,29 +129,12 @@ const BlogPage: React.FC = () => {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full md:w-1/2 px-4 py-2 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
         />
-        {isOwner ? (
-          <button
-            onClick={() => setShowModal(true)}
-            className="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
-          >
-            + Add Post
-          </button>
-        ) : (
-          <button
-            onClick={() => signIn("google")}
-            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
-          >
-            Sign In
-          </button>
-        )}
-        {session && (
-          <button
-            onClick={() => signOut()}
-            className="ml-2 text-xs text-gray-400 underline"
-          >
-            Sign out
-          </button>
-        )}
+        <button
+          onClick={() => setShowModal(true)}
+          className="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
+        >
+          + Add Post
+        </button>
       </div>
 
       {/* Add Post Modal */}
