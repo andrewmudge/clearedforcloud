@@ -118,7 +118,7 @@ const BlogPage: React.FC = () => {
           BLOG
         </h1>
         <h2 className="text-lg md:text-xl text-gray-300 text-center mt-2 mb-2 font-medium">
-          Logging the journey from fighter pilot to cloud professional
+          My personal logbook documenting the journey from fighter pilot to cloud professional
         </h2>
         <div className="mx-auto mt-2 mb-6 w-24 h-1 bg-red-700 rounded"></div>
       </div>
