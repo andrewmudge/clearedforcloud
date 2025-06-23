@@ -56,7 +56,7 @@ const HARDCODED_BLOG_ENTRIES: BlogEntry[] = [
   {
     id: "1",
     title: "Welcome to Cleared for Cloud!",
-    date: "2024-06-01",
+    date: "2024-06-18",
     category: "General",
     image: "/firstblog.png",
     body: `There’s something deeply satisfying about building systems that solve real problems—especially when those systems are scalable, secure, and entirely virtual. That’s what drew me to cloud computing.
@@ -71,10 +71,10 @@ If you're someone who's learning cloud, switching careers, or just curious how r
   {
     id: "2",
     title: "LINUX CLI Bootcamp Day 1",
-    date: "2024-06-10",
+    date: "2024-06-20",
     category: "Learning",
     image: "/linux_blog_post.png",
-    body: "Today I started my Linux CLI bootcamp course. I created a Ubunut EC2 instance with a pem key allowing me to SSH into the instance. I created a .bat file that I placed on the desktop so all I have to do is click the file and a new windows command prompt will open and directly connect me to the server. The sudo apt install ncal didn’t work so I had to use sudo apt udate to update the apt package lists. It worked after applying the update and running sudo apt install ncal.",
+    body: "Today I started my Linux CLI bootcamp course. I created a Ubuntu EC2 instance with a pem key allowing me to SSH into the instance. I created a .bat file that I placed on the desktop so all I have to do is click the file and a new windows command prompt will open and directly connect me to the server. The sudo apt install ncal didn’t work so I had to use sudo apt udate to update the apt package lists. It worked after applying the update and running sudo apt install ncal.",
   },
   // Add more blog entries as needed
 ];
