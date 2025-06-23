@@ -73,7 +73,7 @@ If you're someone who's learning cloud, switching careers, or just curious how r
     title: "LINUX CLI Bootcamp Day 1",
     date: "2024-06-20",
     category: "Learning",
-    image: "/linux_blog_post.png",
+    image: "/Linux_Blog_Post.png",
     body: "Today I started my Linux CLI bootcamp course. I created a Ubuntu EC2 instance with a pem key allowing me to SSH into the instance. I created a .bat file that I placed on the desktop so all I have to do is click the file and a new windows command prompt will open and directly connect me to the server. The sudo apt install ncal didn’t work so I had to use sudo apt udate to update the apt package lists. It worked after applying the update and running sudo apt install ncal.",
   },
   // Add more blog entries as needed
