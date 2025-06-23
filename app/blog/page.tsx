@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 type BlogEntry = {
@@ -54,49 +54,24 @@ function BlogDate({ date }: { date: string }) {
 const BlogPage: React.FC = () => {
   const [search, setSearch] = useState("");
   const [blogEntries, setBlogEntries] = useState<BlogEntry[]>([]);
-  const [showModal, setShowModal] = useState(false);
-  const [newPost, setNewPost] = useState({
-    category: "",
-    title: "",
-    image: "",
-    body: "",
-  });
   const [expanded, setExpanded] = useState<{ [id: string]: boolean }>({});
 
   // Fetch blog posts from DynamoDB via API route
   useEffect(() => {
     fetch("/api/blog")
       .then((res) => res.json())
-      .then(setBlogEntries)
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setBlogEntries(data);
+        } else {
+          setBlogEntries([]); // fallback to empty array on error
+        }
+      })
       .catch((err) => {
         console.error("Failed to fetch blog posts:", err);
         setBlogEntries([]);
       });
   }, []);
-
-  // Handle form input changes
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setNewPost((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // Handle form submit
-  const handleAddPost = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!newPost.title || !newPost.body) return;
-    const res = await fetch("/api/blog", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newPost),
-    });
-    const saved = await res.json();
-    setBlogEntries([saved, ...blogEntries]);
-    setShowModal(false);
-    setNewPost({ category: "", title: "", image: "", body: "" });
-  };
 
   const filteredEntries = blogEntries
     .slice()
@@ -125,7 +100,7 @@ const BlogPage: React.FC = () => {
         <div className="mx-auto mt-2 mb-6 w-24 h-1 bg-red-700 rounded"></div>
       </div>
 
-      {/* Search Bar and Add Post Button */}
+      {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 pt-2 pb-2 flex flex-col md:flex-row md:items-center gap-2">
         <input
           type="text"
@@ -134,83 +109,7 @@ const BlogPage: React.FC = () => {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full md:w-1/2 px-4 py-2 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
         />
-        <button
-          onClick={() => setShowModal(true)}
-          className="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition md:ml-2"
-        >
-          + Add Post
-        </button>
       </div>
-
-      {/* Add Post Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-          <div className="bg-gray-900 rounded-lg shadow-lg p-8 w-full max-w-lg relative">
-            <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl"
-              onClick={() => setShowModal(false)}
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <h2 className="text-2xl font-bold text-white mb-4">Add New Blog Post</h2>
-            <form onSubmit={handleAddPost} className="space-y-4">
-              <div>
-                <label className="block text-gray-300 mb-1">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={newPost.category}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
-                  placeholder="e.g. Projects, Blog"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-300 mb-1">Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={newPost.title}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
-                  placeholder="Blog post title"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-300 mb-1">Cover Image URL</label>
-                <input
-                  type="text"
-                  name="image"
-                  value={newPost.image}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
-                  placeholder="/project1.png or https://..."
-                />
-              </div>
-              <div>
-                <label className="block text-gray-300 mb-1">Body</label>
-                <textarea
-                  name="body"
-                  value={newPost.body}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 rounded border border-gray-700 bg-gray-800 text-white"
-                  rows={6}
-                  placeholder="Write your blog post here..."
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-2 rounded shadow transition w-full"
-              >
-                Add Post
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Blog Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8">
