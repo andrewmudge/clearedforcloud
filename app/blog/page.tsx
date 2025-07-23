@@ -62,8 +62,7 @@ const HARDCODED_BLOG_ENTRIES: BlogEntry[] = [
     body: `There’s something deeply satisfying about building systems that solve real problems—especially when those systems are scalable, secure, and entirely virtual. That’s what drew me to cloud computing.
 
 This blog is my personal platform to document my cloud journey: the lessons I’m learning, the projects I’m building, and the tools and technologies I’m using along the way. I created it not only to track my own progress, but to contribute to the larger community of learners, builders, and professionals who are also figuring things out one service at a time.
-Right now, I’m focused on mastering the AWS ecosystem—Lambda, API Gateway, DynamoDB, Cognito, S3, and more. I'm using tools like the Serverless Framework and Terraform to automate infrastructure and build applications the way modern cloud-native teams do it. As I go, I’ll be writing up the technical breakdowns, deployment strategies, architecture decisions, and hard lessons that come with hands-on learning.
-You won’t find generic cloud theory here. This blog will be project-driven, code-backed, and focused on practical implementation. Whether I’m building an event booking system, a portfolio app, or securing a serverless API, I’ll explain the what, why, and how.
+Right now, I’m focused on mastering the AWS ecosystem—Lambda, API Gateway, DynamoDB, Cognito, S3, and more. I'm using tools like the Serverless Framework and CDK to automate infrastructure and build applications the way modern cloud-native teams do it. As I go, I’ll be writing up the technical breakdowns, deployment strategies, architecture decisions, and hard lessons that come with hands-on learning. This blog will be project-driven, code-backed, and focused on practical implementation. Whether I’m building an event booking system, a portfolio app, or securing a serverless API, I’ll explain the what, why, and how.
 If you're someone who's learning cloud, switching careers, or just curious how real-world cloud solutions are built—this blog is for you. Thanks for reading, and stay tuned.
 
 — Andrew`,
@@ -75,6 +74,42 @@ If you're someone who's learning cloud, switching careers, or just curious how r
     category: "Learning",
     image: "/Linux_Blog_Post.png",
     body: "Today I started my Linux CLI bootcamp course. I created a Ubuntu EC2 instance with a pem key allowing me to SSH into the instance. I created a .bat file that I placed on the desktop so all I have to do is click the file and a new windows command prompt will open and directly connect me to the server. The sudo apt install ncal didn’t work so I had to use sudo apt udate to update the apt package lists. It worked after applying the update and running sudo apt install ncal.",
+  },
+   {
+    id: "3",
+    title: "LINUX CLI Bootcamp Day 2",
+    date: "2024-06-23",
+    category: "Learning",
+    image: "/Linux_Blog_Post.png",
+    body: `Today I learned about file structures and some useful commands. I learned about the man command 
+    which provides a manual of the specificed command. We covered navigation of relative vs absolute paths and some common commands such as pwd, ls, cd. 
+    We also explored options such as -l -a and -s.`,
+  },
+    {
+    id: "4",
+    title: "Get With the Times",
+    date: "2024-07-23",
+    category: "Learning",
+    image: "/linux.jpg",
+    body: `I've been working on the same project for a while now. I've been building it, testing it, breaking it,
+    fixing it, and making it better each time. I started with a amplify Gen 2 deployment, defining the AWS resources in the backend.
+    I tested with a sandbox to ensure functionality before deploying to productino. I learned that it is great for the inital deployment 
+    and getting the app to production quickly, but Amplify was not handling subsequent changes and deployments very well.
+    When I tried to update environment variables or add new resources they wouldn't be successful when defining in the backend.
+    I also learned that deleting a sandbox also deletes the resources, so if you have production resources you need to make sure to keep them separately. 
+    I have learned this lesson twice now. Keep your productions branch separate from your development branch!
+    I used Amplify's branch feature to accomplish this with separate GitHub branches. After repeated attempts to access a DynamoDb table
+    and not having the permissions in the Amplify resource, even though I tested with * Allow, I eventually am trying a new approach.
+    Instead of using Amplify I'm using CDK to define the backend resources. I'm containerizing the app using Docker. I'm using a Dockerfile to build the image and then pushing it to ECR.
+    A big challenge is updating all the amplify calls to now use API routes. It's not a intensive application but there is a good amount of
+    references to Amplify that need to be updated. I'm deploying the app to Apprunner for the hosting.\n\n
+    As I gained more experience about development I learned linux is king. All of my projects before were built
+    in VS Code using the default powershell terminal. When I made the switch from amplify to manual deployment I also updated my machine to
+    use WSL2 with Ubuntu. I updated VS Code to use the WSL2 terminal and now I can run all my commands in the linux terminal. This required me
+    to copy the app folder from my C: to the \\wsl.localhost folder. I also had to re-install all the dependencies in the WSL2 terminal.
+    CDK, AWS CLI, Python, Terraform, Docker...etc. Here is a good resource I used for adding the WSL: https://learn.microsoft.com/en-us/windows/wsl/ \n
+    I am still learning about new strategies for architecture but my biggest takeaway over the last month
+    is to spend time figuring out the best way to deploy your application before you start building it. Time spent up front will save you later on.`,
   },
   // Add more blog entries as needed
 ];
