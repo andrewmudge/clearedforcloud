@@ -81,8 +81,8 @@ If you're someone who's learning cloud, switching careers, or just curious how r
     date: "2024-06-23",
     category: "Learning",
     image: "/Linux_Blog_Post.png",
-    body: `Today I learned about file structures and some useful commands. I learned about the man command 
-    which provides a manual of the specificed command. We covered navigation of relative vs absolute paths and some common commands such as pwd, ls, cd. 
+    body: `Today I learned about file structures and some useful commands. I learned about the man command \
+    which provides a manual of the specificed command. We covered navigation of relative vs absolute paths and some common commands such as pwd, ls, cd. \
     We also explored options such as -l -a and -s.`,
   },
     {
@@ -91,25 +91,25 @@ If you're someone who's learning cloud, switching careers, or just curious how r
     date: "2024-07-23",
     category: "Learning",
     image: "/linux.jpg",
-    body: `I've been working on the same project for a while now. I've been building it, testing it, breaking it,
-    fixing it, and making it better each time. I started with a amplify Gen 2 deployment, defining the AWS resources in the backend.
-    I tested with a sandbox to ensure functionality before deploying to productino. I learned that it is great for the inital deployment 
-    and getting the app to production quickly, but Amplify was not handling subsequent changes and deployments very well.
-    When I tried to update environment variables or add new resources they wouldn't be successful when defining in the backend.
-    I also learned that deleting a sandbox also deletes the resources, so if you have production resources you need to make sure to keep them separately. 
-    I have learned this lesson twice now. Keep your productions branch separate from your development branch!
-    I used Amplify's branch feature to accomplish this with separate GitHub branches. After repeated attempts to access a DynamoDb table
-    and not having the permissions in the Amplify resource, even though I tested with * Allow, I eventually am trying a new approach.
-    Instead of using Amplify I'm using CDK to define the backend resources. I'm containerizing the app using Docker. I'm using a Dockerfile to build the image and then pushing it to ECR.
-    A big challenge is updating all the amplify calls to now use API routes. It's not a intensive application but there is a good amount of
-    references to Amplify that need to be updated. I'm deploying the app to Apprunner for the hosting.\n\n
-    As I gained more experience about development I learned linux is king. All of my projects before were built
-    in VS Code using the default powershell terminal. When I made the switch from amplify to manual deployment I also updated my machine to
-    use WSL2 with Ubuntu. I updated VS Code to use the WSL2 terminal and now I can run all my commands in the linux terminal. This required me
-    to copy the app folder from my C: to the \\wsl.localhost folder. I also had to re-install all the dependencies in the WSL2 terminal.
-    CDK, AWS CLI, Python, Terraform, Docker...etc. Here is a good resource I used for adding the WSL: https://learn.microsoft.com/en-us/windows/wsl/ \n
-    I am still learning about new strategies for architecture but my biggest takeaway over the last month
-    is to spend time figuring out the best way to deploy your application before you start building it. Time spent up front will save you later on.`,
+    body: 'I\'ve been working on the same project for a while now. I\'ve been building it, testing it, breaking it,\
+    fixing it, and making it better each time. I started with a amplify Gen 2 deployment, defining the AWS resources in the backend.\
+    I tested with a sandbox to ensure functionality before deploying to productino. I learned that it is great for the inital deployment \
+    and getting the app to production quickly, but Amplify was not handling subsequent changes and deployments very well.\
+    When I tried to update environment variables or add new resources they wouldn\'t be successful when defining in the backend.\
+    I also learned that deleting a sandbox also deletes the resources, so if you have production resources you need to make sure to keep them separately. \
+    I have learned this lesson twice now. Keep your productions branch separate from your development branch!\
+    I used Amplify\'s branch feature to accomplish this with separate GitHub branches. After repeated attempts to access a DynamoDb table\
+    and not having the permissions in the Amplify resource, even though I tested with * Allow, I eventually am trying a new approach.\
+    Instead of using Amplify I\'m using CDK to define the backend resources. I\'m containerizing the app using Docker. I\'m using a Dockerfile to build the image and then pushing it to ECR.\
+    A big challenge is updating all the amplify calls to now use API routes. It\'s not a intensive application but there is a good amount of\
+    references to Amplify that need to be updated. I\'m deploying the app to Apprunner for the hosting.\n\n\
+    As I gained more experience about development I learned linux is king. All of my projects before were built\
+    in VS Code using the default powershell terminal. When I made the switch from amplify to manual deployment I also updated my machine to\
+    use WSL2 with Ubuntu. I updated VS Code to use the WSL2 terminal and now I can run all my commands in the linux terminal. This required me\
+    to copy the app folder from my C: to the \\wsl.localhost folder. I also had to re-install all the dependencies in the WSL2 terminal.\
+    CDK, AWS CLI, Python, Terraform, Docker...etc. Here is a good resource I used for adding the WSL: https://learn.microsoft.com/en-us/windows/wsl/ \n\
+    I am still learning about new strategies for architecture but my biggest takeaway over the last month\
+    is to spend time figuring out the best way to deploy your application before you start building it. Time spent up front will save you later on.',
   },
   // Add more blog entries as needed
 ];
