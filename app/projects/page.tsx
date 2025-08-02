@@ -101,33 +101,188 @@ export default function ProjectsPage() {
     },
     {
       id: 2,
-      title: "Multi-Tier Web App in a VPC",
+      title: "Full Stack Next.js + AWS Web App for Family Reunion",
       description: (
         <>
           <p className="mb-2 text-gray-200">
-            Deployed a 3-tier Flask application inside a secure VPC, segmented by subnets and protected by security groups and NACLs.
+            Created a secure, scalable AWS app for a personal Family Reunion using CDK to enable authentication, data storage, and notification. Optimized for growth, security and reliability.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Problem Solved:</strong> Needed isolation between app layers, secure DB access, and controlled internet exposure for the frontend only.
+            <strong>Problem Solved:</strong> Needed a platform to share important details, schedules, and pricing information for an annual family reunion. This also required restricting content such as photos and a family tree to authenticated family users only. 
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Architecture:</strong> Public subnet hosts ALB, which routes to EC2 app servers in private subnets. RDS PostgreSQL lives in isolated DB subnet. Bastion host enables SSH for admin.
+            <strong>Architecture:</strong> A custom auth modal with email verification links to cognito which handles user authentication. A dynamoDB table stores a list of pre-approved family member emails. S3 bucket stores user uploaded photos. Lambda is used to retrieve and upload photos.
           </p>
           <p className="text-sm text-gray-400 mb-4">
-            <strong>Tech Stack:</strong> EC2, RDS, Flask, VPC, Subnets, ALB, IAM, CloudWatch
+            <strong>Tech Stack:</strong> CDK, Cognito, S3, DynamoDB, Lambda, SES, CloudFront
           </p>
           <p className="text-gray-300 mt-2">
-            <strong>Full Description:</strong>This project showcases my ability to ......
+            <strong>Full Description:</strong> CFR Next is a secure, full-stack web platform built to support my personal Family Reunion Website "Churchwell Family Reunion". This project showcases my ability to architect, build, and deploy cloud-native applications using modern serverless technologies and infrastructure-as-code practices on AWS.
             <br /><br />
+            <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/architecture.png"
+                    alt="Architecture Diagram"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+            <br />
+            Authentication is handled via Amazon Cognito, featuring email verification and secure JWTs stored in HttpOnly cookies. Authorized user access is enforced using a DynamoDB whitelist table.
+            <br /><br />
+<pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4 inline-block">
+  <code>
+{`export interface ApprovedUserData {
+  email: string;
+  givenName: string;
+  familyName: string;
+  phoneNumber?: string;
+}
+
+/**
+ * Checks if the given email is in the ApprovedUsers DynamoDB table.
+ * @param email The user's email address
+ * @returns true if approved, false otherwise
+ */
+export async function checkUserApproval(email: string): Promise<boolean> {
+  if (!email) return false;
+  if (typeof window === 'undefined') {
+    throw new Error('checkUserApproval should only be called on the client');
+  }
+  try {
+    const res = await fetch(\`/api/auth/check-approval?email=\${encodeURIComponent(email)}\`);
+    if (!res.ok) {
+      throw new Error(\`API error: \${res.status}\`);
+    }
+    const data = await res.json();
+    return !!data.approved;
+  } catch (err) {
+    console.error('Approval API check error:', err);
+    return false;
+  }
+}
+`}
+  </code>
+</pre>
+            <br />
+            The frontend is developed using Next.js with API routes that communicate directly with AWS Lambda functions.
+            <br />
+            <div className="w-full my-8">
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/lambda.png"
+                    alt="lambda list"
+                    width={300}
+                    height={220}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/photogallery.png"
+                    alt="Snip of Photo Gallery"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            The application allows authenticated users to upload and browse family photos securely using S3 via a list-photo and upload-photo lambda function. AWS SES is integrated to send a Admins emails automatically if a email not on the whitelist registers for an account, triggered by Lambda post-confirmation events. Admin users have access to tools for managing user access and content through protected API routes. This is in a user dashboard.
+            <br /><br />
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/cfradmin.png"
+                    alt="Admin Dashboard"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+            <br /><br />
+            Infrastructure is fully managed with AWS CDK (TypeScript), provisioning all core resources including the Cognito User Pool, Lambda functions, DynamoDB tables, and SES configurations. This ensures secure, repeatable, and auditable deployments via CloudFormation. Here is the foundation of the cdk-stack.
+            <br /><br />
+            <pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4">
+                <code>
+              {`
+import { Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
+
+export class CfrNextStack extends Stack {
+constructor(scope: Construct, id: string, props?: StackProps) {
+super(scope, id, props);
+
+// S3 Bucket
+const bucket = new s3.Bucket(this, 'CfrPhotoBucket');
+
+// DynamoDB Table
+const approvedUsersTable = new dynamodb.Table(this, 'ApprovedEmails', {
+partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
+tableName: 'ApprovedEmails'
+});
+
+// Cognito User Pool
+const userPool = new cognito.UserPool(this, 'UserPool', {
+userPoolName: 'CfrUserPool',
+selfSignUpEnabled: true,
+signInAliases: { email: true },
+autoVerify: { email: true },
+accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
+});
+
+const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
+userPool,
+generateSecret: false,
+authFlows: { userPassword: true, userSrp: true },
+});
+
+new CfnOutput(this, 'UserPoolId', {
+value: userPool.userPoolId,
+});
+
+new CfnOutput(this, 'UserPoolClientId', {
+value: userPoolClient.userPoolClientId,
+});
+
+  }
+}
+
+              `}
+                </code>
+</pre>
+            <br /><br />
+            The design adheres to the AWS Well-Architected Framework:
+            <ul className="list-disc list-inside mt-2">
+              <li><strong>Operational Excellence:</strong> CDK-managed infrastructure, CloudWatch logs</li>
+              <li><strong>Security:</strong> Cognito MFA, least privilege IAM, secure cookie-based JWTs</li>
+              <li><strong>Reliability:</strong> Fully managed AWS services with high availability</li>
+              <li><strong>Performance Efficiency:</strong> Serverless execution with on-demand scaling</li>
+              <li><strong>Cost Optimization:</strong> S3 lifecycle rules, on-demand DynamoDB, no idle servers</li>
+              <li><strong>Sustainability:</strong> Lightweight, auto-scaling architecture with minimal resource waste</li>
+            </ul>
+            <br /><br />
+            This project reflects my hands-on expertise in building production-ready applications using AWS services and Next.js. It also highlights my fluency with secure authentication flows, event-driven architecture, and infrastructure automation using modern DevOps best practices.
           </p>
+
         </>
       ),
-      link: "/projects/multi-tier-web-app",
+      link: "https://churchwellreunion.com",
       imgSrc: "/project2.png",
-      imgAlt: "Multi-Tier VPC Architecture Diagram",
+      imgAlt: "Churchwell Family Reunion Website",
       year: "2025",
-      techStack: ["EC2", "RDS", "Flask", "VPC", "Subnets", "ALB", "IAM", "CloudWatch"],
-      externalLink: "https://github.com/andrewmudge/cloud-resume",
+      techStack: ["CDK", "Cognito", "S3", "DynamoDB", "Lambda", "SES", "CloudFront"],
+      externalLink: "https://github.com/andrewmudge/cfr-next-cdk-app/blob/main/cfr-next/README.md",
     },
     {
       id: 3,
@@ -226,7 +381,8 @@ export default function ProjectsPage() {
   const summaryProjects = projects.map((project) => ({
     year: project.year,
     name: project.title,
-    link: project.externalLink || project.link || "#",
+    link: project.link || "#", // always the website
+    externalLink: project.externalLink || "",
     techStack: project.techStack,
   }));
 
@@ -274,6 +430,7 @@ export default function ProjectsPage() {
               <tr>
                 <th className="px-4 py-3 text-left">Year</th>
                 <th className="px-4 py-3 text-left">Project</th>
+                <th className="px-4 py-3 text-left">GitHub Repo</th>
                 <th className="px-4 py-3 text-left">Link</th>
                 <th className="px-4 py-3 text-left">Tech Stack</th>
               </tr>
@@ -284,6 +441,20 @@ export default function ProjectsPage() {
                   <td className="px-4 py-3">{project.year}</td>
                   <td className="px-4 py-3 font-medium">{project.name}</td>
                   <td className="px-4 py-3">
+                    {project.externalLink ? (
+                      <a
+                        href={project.externalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-500 hover:underline"
+                      >
+                        View →
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
                     {project.link !== "#" ? (
                       <a
                         href={project.link}
@@ -291,7 +462,7 @@ export default function ProjectsPage() {
                         rel="noopener noreferrer"
                         className="text-red-500 hover:underline"
                       >
-                        View →
+                        <span className="whitespace-nowrap">App&nbsp;→</span>
                       </a>
                     ) : (
                       "—"

@@ -193,7 +193,7 @@ export default function Home() {
       <a href="/projects#2">
         <Image
           src="/project2.png"
-          alt="Multi-Tier Web App in a VPC"
+          alt="Churchwell Family Reunion Website"
           width={600}
           height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
@@ -202,10 +202,10 @@ export default function Home() {
     </div>
     <div className="p-4 flex flex-col justify-center flex-grow">
       <a href="/projects#2">
-        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Multi-Tier Web App in a VPC</h3>
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Family Reunion Web App</h3>
       </a>
-      <p>Deployed a 3-tier Flask app using EC2, RDS, and ALB with secure private networking and a bastion host setup.</p>
-      <p className="text-sm text-gray-400 mt-2">Tech: EC2, ALB, RDS, VPC, S3, CloudWatch</p>
+      <p>Created a secure, scalable AWS app for a personal Famiy Reunion using CDK to enable authentication, data storage, and notification. Optimized for growth, security and reliability</p>
+      <p className="text-sm text-gray-400 mt-2">CDK, Cognito, S3, DynamoDB, Lambda, SES</p>
     </div>
   </div>
 
