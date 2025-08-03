@@ -3,8 +3,109 @@ import Image from "next/image";
 
 export default function ProjectsPage() {
   const projects = [
-    {
+       {
       id: 1,
+      title: "Full Stack Next.js + AWS Web App for Family Reunion",
+      description: (
+        <>
+          <p className="mb-2 text-gray-200">
+            Created a secure, scalable AWS app for a personal Family Reunion using CDK to enable authentication, data storage, and notification. Optimized for growth, security and reliability.
+          </p>
+          <p className="mb-2 text-gray-200">
+            <strong>Problem Solved:</strong> The platform solves a real-world challenge of securely sharing sensitive family-only content—photos, schedules, and a private family tree—by enforcing authentication, authorization, and automated user management workflows. Cognito handles user registration and email verification, with JWTs stored in HttpOnly cookies for secure sessions. A DynamoDB whitelist table ensures that only pre-approved family members can access private content. 
+          </p>
+          <p className="mb-2 text-gray-200">
+            <strong>Architecture:</strong> A custom auth modal with email verification links to cognito which handles user authentication. A dynamoDB table stores a list of pre-approved family member emails. S3 bucket stores user uploaded photos. Lambda is used to retrieve and upload photos.
+          </p>
+          <p className="text-sm text-gray-400 mb-4">
+            <strong>Tech Stack:</strong> CDK, Cognito, S3, DynamoDB, Lambda, SES, CloudFront
+          </p>
+          <p className="text-gray-300 mt-2">
+  <strong>Full Description:</strong> CFR Next is a secure, full-stack web app built for the Churchwell Family Reunion. This project demonstrates my ability to architect, build, and deploy cloud-native applications using serverless technologies and AWS infrastructure-as-code via CDK.
+  <br /><br />
+  Authentication is managed by Amazon Cognito with email verification and secure JWTs stored in HttpOnly cookies. Access is restricted to pre-approved users, stored in a DynamoDB whitelist. Here’s a snippet of the client logic that checks if a user is approved:
+  <div className="flex justify-center">
+    <pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4 inline-block">
+      <code>
+{`const res = await fetch(\`/api/auth/check-approval?email=\${encodeURIComponent(email)}\`);
+if (!res.ok) throw new Error(\`API error: \${res.status}\`);
+const data = await res.json();
+return !!data.approved;`}
+      </code>
+    </pre>
+  </div>
+  The frontend is built with Next.js and uses API routes that communicate directly with AWS Lambda functions. List Photos, Upload Photos and Delete Photos all connect to a CloudFront distribution that serves the CFR photo bucket to manage family photos. This S3 Admin-only features like user management are secured with role-based logic so only authorized users can access them.
+  <br /><br />
+  <div className="flex-1 flex justify-center">
+    <Image
+      src="/photogallery.png"
+      alt="Snip of Photo Gallery"
+      width={500}
+      height={320}
+      className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+      style={{ maxWidth: "100%", height: "auto" }}
+    />
+  </div>
+  <br />
+  Infrastructure is fully defined in CDK. Below is a portion of the stack provisioning Cognito and DynamoDB:
+   <div className="flex justify-center">
+    <pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4 inline-block">
+    <code>
+{`const approvedUsersTable = new dynamodb.Table(this, 'ApprovedEmails', {
+  partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
+  tableName: 'ApprovedEmails'
+});
+
+const userPool = new cognito.UserPool(this, 'UserPool', {
+  userPoolName: 'CfrUserPool',
+  selfSignUpEnabled: true,
+  signInAliases: { email: true },
+  autoVerify: { email: true },
+  accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
+});`}
+    </code>
+  </pre>
+  </div>
+  <br />
+  The project is deployed to Vercel, with CI/CD integrated via GitHub. Pushes to the <code>main</code> branch trigger automatic production deployments. Feature development happens in the <code>dev</code> branch, which generates Vercel preview deployments—allowing me to test changes in isolation without affecting live users.
+  <br /><br />
+  All environment variables—Cognito client IDs, S3 buckets, and SES email settings—are managed securely in Vercel’s dashboard, enabling seamless zero-downtime deployments across dev and prod environments.
+  <br /><br />
+  <div className="flex-1 flex justify-center">
+    <Image
+      src="/architecture.png"
+      alt="Architecture Diagram"
+      width={500}
+      height={320}
+      className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+      style={{ maxWidth: "100%", height: "auto" }}
+    />
+  </div>
+  <br /><br />
+  The system aligns with the AWS Well-Architected Framework:
+  <ul className="list-disc list-inside mt-2">
+    <li><strong>Operational Excellence:</strong> CDK-based deployments with CloudWatch monitoring</li>
+    <li><strong>Security:</strong> Cognito MFA, secure JWT storage, least privilege IAM roles</li>
+    <li><strong>Reliability:</strong> Fully managed AWS components ensure high availability</li>
+    <li><strong>Performance Efficiency:</strong> Serverless compute scales with demand</li>
+    <li><strong>Cost Optimization:</strong> Pay-per-use architecture, no idle resources</li>
+    <li><strong>Sustainability:</strong> Lightweight stack minimizes environmental footprint</li>
+  </ul>
+  <br /><br />
+  This project showcases my hands-on experience with secure authentication flows, infrastructure automation, and event-driven architecture—all delivered in a clean, responsive UI using Next.js and AWS.
+</p>
+
+        </>
+      ),
+      link: { url: "https://churchwellreunion.com", target: "_blank" },
+      imgSrc: "/project2.png",
+      imgAlt: "Churchwell Family Reunion Website",
+      year: "2025",
+      techStack: ["CDK", "Cognito", "S3", "DynamoDB", "Lambda", "SES", "CloudFront"],
+      externalLink: "https://github.com/andrewmudge/cfr-next-cdk-app/blob/main/cfr-next/README.md",
+    },
+    {
+      id: 2,
       title: "Scalable Serverless Event Booking System",
       description: (
         <>
@@ -92,197 +193,12 @@ export default function ProjectsPage() {
           </p>
         </>
       ),
-      link: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/",
+link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", target: "_blank" },
       imgSrc: "/project1.png",
       imgAlt: "Serverless Event Booking Architecture Diagram",
       year: "2025",
       techStack: ["Next.js", "AWS Lambda", "API Gateway", "DynamoDB", "SES", "Cognito", "S3", "CloudWatch"],
       externalLink: "https://github.com/andrewmudge/serverless_booking",
-    },
-    {
-      id: 2,
-      title: "Full Stack Next.js + AWS Web App for Family Reunion",
-      description: (
-        <>
-          <p className="mb-2 text-gray-200">
-            Created a secure, scalable AWS app for a personal Family Reunion using CDK to enable authentication, data storage, and notification. Optimized for growth, security and reliability.
-          </p>
-          <p className="mb-2 text-gray-200">
-            <strong>Problem Solved:</strong> Needed a platform to share important details, schedules, and pricing information for an annual family reunion. This also required restricting content such as photos and a family tree to authenticated family users only. 
-          </p>
-          <p className="mb-2 text-gray-200">
-            <strong>Architecture:</strong> A custom auth modal with email verification links to cognito which handles user authentication. A dynamoDB table stores a list of pre-approved family member emails. S3 bucket stores user uploaded photos. Lambda is used to retrieve and upload photos.
-          </p>
-          <p className="text-sm text-gray-400 mb-4">
-            <strong>Tech Stack:</strong> CDK, Cognito, S3, DynamoDB, Lambda, SES, CloudFront
-          </p>
-          <p className="text-gray-300 mt-2">
-            <strong>Full Description:</strong> CFR Next is a secure, full-stack web platform built to support my personal Family Reunion Website "Churchwell Family Reunion". This project showcases my ability to architect, build, and deploy cloud-native applications using modern serverless technologies and infrastructure-as-code practices on AWS.
-            <br /><br />
-            <div className="flex-1 flex justify-center">
-                  <Image
-                    src="/architecture.png"
-                    alt="Architecture Diagram"
-                    width={500}
-                    height={320}
-                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                </div>
-            <br />
-            Authentication is handled via Amazon Cognito, featuring email verification and secure JWTs stored in HttpOnly cookies. Authorized user access is enforced using a DynamoDB whitelist table.
-            <br /><br />
-<pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4 inline-block">
-  <code>
-{`export interface ApprovedUserData {
-  email: string;
-  givenName: string;
-  familyName: string;
-  phoneNumber?: string;
-}
-
-/**
- * Checks if the given email is in the ApprovedUsers DynamoDB table.
- * @param email The user's email address
- * @returns true if approved, false otherwise
- */
-export async function checkUserApproval(email: string): Promise<boolean> {
-  if (!email) return false;
-  if (typeof window === 'undefined') {
-    throw new Error('checkUserApproval should only be called on the client');
-  }
-  try {
-    const res = await fetch(\`/api/auth/check-approval?email=\${encodeURIComponent(email)}\`);
-    if (!res.ok) {
-      throw new Error(\`API error: \${res.status}\`);
-    }
-    const data = await res.json();
-    return !!data.approved;
-  } catch (err) {
-    console.error('Approval API check error:', err);
-    return false;
-  }
-}
-`}
-  </code>
-</pre>
-            <br />
-            The frontend is developed using Next.js with API routes that communicate directly with AWS Lambda functions.
-            <br />
-            <div className="w-full my-8">
-              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
-                <div className="flex-1 flex justify-center">
-                  <Image
-                    src="/lambda.png"
-                    alt="lambda list"
-                    width={300}
-                    height={220}
-                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <Image
-                    src="/photogallery.png"
-                    alt="Snip of Photo Gallery"
-                    width={500}
-                    height={320}
-                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                </div>
-              </div>
-            </div>
-            <br />
-            The application allows authenticated users to upload and browse family photos securely using S3 via a list-photo and upload-photo lambda function. AWS SES is integrated to send a Admins emails automatically if a email not on the whitelist registers for an account, triggered by Lambda post-confirmation events. Admin users have access to tools for managing user access and content through protected API routes. This is in a user dashboard.
-            <br /><br />
-                <div className="flex-1 flex justify-center">
-                  <Image
-                    src="/cfradmin.png"
-                    alt="Admin Dashboard"
-                    width={500}
-                    height={320}
-                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                </div>
-            <br /><br />
-            Infrastructure is fully managed with AWS CDK (TypeScript), provisioning all core resources including the Cognito User Pool, Lambda functions, DynamoDB tables, and SES configurations. This ensures secure, repeatable, and auditable deployments via CloudFormation. Here is the foundation of the cdk-stack.
-            <br /><br />
-            <pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4">
-                <code>
-              {`
-import { Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
-import * as iam from 'aws-cdk-lib/aws-iam';
-import * as cognito from 'aws-cdk-lib/aws-cognito';
-
-export class CfrNextStack extends Stack {
-constructor(scope: Construct, id: string, props?: StackProps) {
-super(scope, id, props);
-
-// S3 Bucket
-const bucket = new s3.Bucket(this, 'CfrPhotoBucket');
-
-// DynamoDB Table
-const approvedUsersTable = new dynamodb.Table(this, 'ApprovedEmails', {
-partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
-tableName: 'ApprovedEmails'
-});
-
-// Cognito User Pool
-const userPool = new cognito.UserPool(this, 'UserPool', {
-userPoolName: 'CfrUserPool',
-selfSignUpEnabled: true,
-signInAliases: { email: true },
-autoVerify: { email: true },
-accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
-});
-
-const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
-userPool,
-generateSecret: false,
-authFlows: { userPassword: true, userSrp: true },
-});
-
-new CfnOutput(this, 'UserPoolId', {
-value: userPool.userPoolId,
-});
-
-new CfnOutput(this, 'UserPoolClientId', {
-value: userPoolClient.userPoolClientId,
-});
-
-  }
-}
-
-              `}
-                </code>
-</pre>
-            <br /><br />
-            The design adheres to the AWS Well-Architected Framework:
-            <ul className="list-disc list-inside mt-2">
-              <li><strong>Operational Excellence:</strong> CDK-managed infrastructure, CloudWatch logs</li>
-              <li><strong>Security:</strong> Cognito MFA, least privilege IAM, secure cookie-based JWTs</li>
-              <li><strong>Reliability:</strong> Fully managed AWS services with high availability</li>
-              <li><strong>Performance Efficiency:</strong> Serverless execution with on-demand scaling</li>
-              <li><strong>Cost Optimization:</strong> S3 lifecycle rules, on-demand DynamoDB, no idle servers</li>
-              <li><strong>Sustainability:</strong> Lightweight, auto-scaling architecture with minimal resource waste</li>
-            </ul>
-            <br /><br />
-            This project reflects my hands-on expertise in building production-ready applications using AWS services and Next.js. It also highlights my fluency with secure authentication flows, event-driven architecture, and infrastructure automation using modern DevOps best practices.
-          </p>
-
-        </>
-      ),
-      link: "https://churchwellreunion.com",
-      imgSrc: "/project2.png",
-      imgAlt: "Churchwell Family Reunion Website",
-      year: "2025",
-      techStack: ["CDK", "Cognito", "S3", "DynamoDB", "Lambda", "SES", "CloudFront"],
-      externalLink: "https://github.com/andrewmudge/cfr-next-cdk-app/blob/main/cfr-next/README.md",
     },
     {
       id: 3,
@@ -381,7 +297,8 @@ value: userPoolClient.userPoolClientId,
   const summaryProjects = projects.map((project) => ({
     year: project.year,
     name: project.title,
-    link: project.link || "#", // always the website
+    link: typeof project.link === "string" ? project.link : (project.link?.url || "#"),
+    linkTarget: typeof project.link === "object" && project.link?.target ? project.link.target : undefined,
     externalLink: project.externalLink || "",
     techStack: project.techStack,
   }));
@@ -407,7 +324,7 @@ value: userPoolClient.userPoolClientId,
             <ExpandProject
               title={title}
               description={description}
-              link={link}
+              link={typeof link === "string" ? link : link?.url}
               imgSrc={imgSrc}
               imgAlt={imgAlt}
               externalLink={externalLink}
@@ -458,8 +375,8 @@ value: userPoolClient.userPoolClientId,
                     {project.link !== "#" ? (
                       <a
                         href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={project.linkTarget || undefined}
+                        rel={project.linkTarget ? "noopener noreferrer" : undefined}
                         className="text-red-500 hover:underline"
                       >
                         <span className="whitespace-nowrap">App&nbsp;→</span>

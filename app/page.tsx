@@ -165,32 +165,12 @@ export default function Home() {
 
   {/* Grid container */}
   <div className="grid gap-8 max-w-6xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+ 
+
   {/* Project Card 1 */}
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#1">
-        <Image
-          src="/project1.png"
-          alt="Scalable Serverless Web App"
-          width={600}
-          height={256}
-          className="w-full h-64 object-contain rounded bg-gray-900"
-        />
-      </a>
-    </div>
-    <div className="p-4 flex flex-col justify-center flex-grow">
-      <a href="/projects#1">
-        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Scalable Serverless Web App</h3>
-      </a>
-      <p>Built an event booking system using fully serverless architecture with real-time email notifications and CI/CD pipelines.</p>
-      <p className="text-sm text-gray-400 mt-2">Tech: Next.js, API Gateway, Lambda, DynamoDB, SES, Cognito</p>
-    </div>
-  </div>
-
-  {/* Project Card 2 */}
-  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
-    <div className="p-2">
-      <a href="/projects#2">
         <Image
           src="/project2.png"
           alt="Churchwell Family Reunion Website"
@@ -201,11 +181,33 @@ export default function Home() {
       </a>
     </div>
     <div className="p-4 flex flex-col justify-center flex-grow">
-      <a href="/projects#2">
+      <a href="/projects#1">
         <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Family Reunion Web App</h3>
       </a>
       <p>Created a secure, scalable AWS app for a personal Famiy Reunion using CDK to enable authentication, data storage, and notification. Optimized for growth, security and reliability</p>
       <p className="text-sm text-gray-400 mt-2">CDK, Cognito, S3, DynamoDB, Lambda, SES</p>
+    </div>
+  </div>
+
+ {/* Project Card 2 */}
+  <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
+    <div className="p-2">
+      <a href="/projects#2">
+        <Image
+          src="/project1.png"
+          alt="Scalable Serverless Web App"
+          width={600}
+          height={256}
+          className="w-full h-64 object-contain rounded bg-gray-900"
+        />
+      </a>
+    </div>
+    <div className="p-4 flex flex-col justify-center flex-grow">
+      <a href="/projects#2">
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">Scalable Serverless Web App</h3>
+      </a>
+      <p>Built an event booking system using fully serverless architecture with real-time email notifications and CI/CD pipelines.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: Next.js, API Gateway, Lambda, DynamoDB, SES, Cognito</p>
     </div>
   </div>
 

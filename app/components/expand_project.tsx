@@ -93,6 +93,8 @@ export default function ExpandProject({
         <div className="mt-4 flex flex-row items-center gap-4">
           <a
             href={link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block text-white hover:underline font-semibold"
           >
             Link
