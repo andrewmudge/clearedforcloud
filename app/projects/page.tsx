@@ -306,7 +306,7 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
   return (
     <section className="px-6 py-16 bg-gray-900 min-h-screen">
       <h1 className="text-4xl font-bold text-center mt-10 mb-10 text-red-500 tracking-wide">
-        🛠️ Featured Projects in Detail
+        Featured Projects in Detail
       </h1>
 
       <div className="text-center mb-8">

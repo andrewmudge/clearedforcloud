@@ -211,7 +211,7 @@ export default function Home() {
     </div>
   </div>
 
-  {/* Project Card 3 */}
+  {/* Project Card 3 
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#3">
@@ -231,9 +231,9 @@ export default function Home() {
       <p>Created a fully automated pipeline using CodePipeline and Terraform with blue/green deployments and secure secrets management.</p>
       <p className="text-sm text-gray-400 mt-2">Tech: CodePipeline, Terraform, CodeBuild, CodeDeploy</p>
     </div>
-  </div>
+  </div> */}
 
-  {/* Project Card 4 */}
+  {/* Project Card 4 
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#4">
@@ -253,9 +253,9 @@ export default function Home() {
       <p>Monitors AWS account for anomalies using GuardDuty and CloudTrail, visualized in a custom frontend with alerting.</p>
       <p className="text-sm text-gray-400 mt-2">Tech: GuardDuty, EventBridge, Lambda, DynamoDB, Next.js</p>
     </div>
-  </div>
+  </div> */}
 
-  {/* Project Card 5 */}
+  {/* Project Card 5 
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#5">
@@ -275,7 +275,7 @@ export default function Home() {
       <p>Delivered globally available website using CloudFront with S3 origin and Route 53 failover across AWS regions.</p>
       <p className="text-sm text-gray-400 mt-2">Tech: CloudFront, S3, Route 53, Lambda, Terraform</p>
     </div>
-  </div>
+  </div> */}
 </div>
 </section>
 
