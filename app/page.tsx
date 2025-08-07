@@ -151,7 +151,7 @@ export default function Home() {
 
 {/* Projects */}
 <section id="projects" className="py-16 px-6 bg-gray-900">
-  <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">🛠️ Featured Projects</h2>
+  <h2 className="text-3xl font-bold text-center mb-6 text-red-500 tracking-wide">Featured Projects</h2>
 
   {/* Link to full projects page */}
   <div className="text-center mb-8">
@@ -211,13 +211,13 @@ export default function Home() {
     </div>
   </div>
 
-  {/* Project Card 3 
+  {/* Project Card 3 */}
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
       <a href="/projects#3">
         <Image
-          src="/project3.png"
-          alt="CI/CD Pipeline with IaC"
+          src="/ec2-project2-architecture.png"
+          alt="VPC Overview"
           width={600}
           height={256}
           className="w-full h-64 object-contain rounded bg-gray-900"
@@ -226,12 +226,12 @@ export default function Home() {
     </div>
     <div className="p-4 flex flex-col justify-center flex-grow">
       <a href="/projects#3">
-        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">CI/CD Pipeline with IaC</h3>
+        <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">EC2 Project Series</h3>
       </a>
-      <p>Created a fully automated pipeline using CodePipeline and Terraform with blue/green deployments and secure secrets management.</p>
-      <p className="text-sm text-gray-400 mt-2">Tech: CodePipeline, Terraform, CodeBuild, CodeDeploy</p>
+      <p>A five part project series that uses a building block approach to learn EC2 concepts. Progressing from manual deployment via CLI to IaC with Terraform and CDK.</p>
+      <p className="text-sm text-gray-400 mt-2">Tech: EC2, VPC, ALB, ASG, Security Groups, Terraform, CDK</p>
     </div>
-  </div> */}
+  </div> 
 
   {/* Project Card 4 
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
