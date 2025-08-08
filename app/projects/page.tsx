@@ -22,7 +22,30 @@ export default function ProjectsPage() {
           </p>
           <p className="text-gray-300 mt-2">
   <strong>Full Description:</strong> CFR Next is a secure, full-stack web app built for the Churchwell Family Reunion. This project demonstrates my ability to architect, build, and deploy cloud-native applications using serverless technologies and AWS infrastructure-as-code via CDK.
-  <br /><br />
+  <br /><div className="w-full my-8">
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/cfr-2.png"
+                    alt="Booking Post Login"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-125 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/cfr-1.png"
+                    alt="booking email confirmation"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+            </div><br />
   Authentication is managed by Amazon Cognito with email verification and secure JWTs stored in HttpOnly cookies. Access is restricted to pre-approved users, stored in a DynamoDB whitelist. Here’s a snippet of the client logic that checks if a user is approved:
   <div className="flex justify-center">
     <pre className="bg-gray-100 text-gray-800 rounded p-4 overflow-x-auto text-sm my-4 inline-block">
@@ -202,37 +225,71 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
     },
     {
       id: 3,
-      title: "CI/CD Pipeline with Infrastructure as Code",
+      title: "EC2 Project Series",
       description: (
         <>
           <p className="mb-2 text-gray-200">
-            Designed an automated blue/green deployment pipeline to eliminate downtime during updates.
+            This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPC's, Subnets, Route Tables, Internet Gateways, NAT Gateways and more.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Problem Solved:</strong> Manual deployments caused downtime and human error. Needed faster, safer delivery of updates.
+            <strong>Problem Solved:</strong> Launching an instance through the console is time consuming and prone to errors. Learning to do it with Iac greatly improves efficiency, productivity and reliability.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Architecture:</strong> CodePipeline triggers on GitHub commits. Terraform provisions infra. CodeBuild compiles code, CodeDeploy handles traffic shift with rollback on failure.
+            <strong>Architecture:</strong> EC2 instances are launched behind a Load balancer for high availability. Auto Scaling Groups are used to ensure that the instances are always running and can scale up or down based on demand. VPC's, Subnets, Route Tables, Internet Gateways and NAT Gateways are used to ensure that the instances are secure and can communicate with each other.
           </p>
           <p className="text-sm text-gray-400 mb-4">
-            <strong>Tech Stack:</strong> CodePipeline, CodeBuild, CodeDeploy, Terraform, GitHub, S3, IAM
+            <strong>Tech Stack:</strong> EC2, VPC, ALB, ASG, Security Groups, Terraform, CDK
           </p>
           <p className="text-gray-300 mt-2">
-            <strong>Full Description:</strong>This project showcases my ability to ......
+            <strong>Full Description:</strong>This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPC's, Subnets, Route Tables, Internet Gateways, NAT Gateways and more. The project tutorials are hosted on Github as mark down files. You can find the link to each project below.
             <br /><br />
+            <div className="flex-1 flex justify-center">
+                  <Image
+                    src="/ec2-project2-architecture.png"
+                    alt="EC2 Project 2 Architecture"
+                    width={500}
+                    height={320}
+                    className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+            <br /><br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Overview
+            </a>
+            <br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/1-ec2-web-server.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Part 1 - EC2 Web Server Deployment
+            </a>
+            <br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/1-ec2-web-server.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Part 2 - Flask App CLI Deployment
+            </a>
+            <br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/3-terraform-infrastructure.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Part 3 - Terraform Infrastructure as Code
+            </a>
+            <br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/4-cdk-deployment.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Part 4 - CDK Deployment Pipeline
+            </a>
+            <br />
+            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/5-production-best-practices.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
+              Part 5 - Production Best Practices
+            </a>
           </p>
         </>
       ),
-      link: "/projects/cicd-pipeline-iac",
-      imgSrc: "/project3.png",
-      imgAlt: "CI/CD Pipeline Architecture Diagram",
+      link: { url: "https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md", target: "_blank" },
+      imgSrc: "/ec2-project2-architecture.png",
+      imgAlt: "EC2 Architecture",
       year: "2025",
-      techStack: ["CodePipeline", "CodeBuild", "CodeDeploy", "Terraform", "GitHub", "S3", "IAM"],
-      externalLink: "https://github.com/andrewmudge/devsecops-pipeline",
+      techStack: ["EC2", "VPC", "ALB", "ASG", "Security Groups", "Terraform", "CDK"],
+      externalLink: "https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md",
     },
     {
       id: 4,
-      title: "Real-Time Cloud Security Dashboard",
+      title: "Real-Time Cloud Security Dashboard - IN PROGRESS",
       description: (
         <>
           <p className="mb-2 text-gray-200">
@@ -263,7 +320,7 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
     },
     {
       id: 5,
-      title: "Global Content Delivery System",
+      title: "Global Content Delivery System - NEXT UP",
       description: (
         <>
           <p className="mb-2 text-gray-200">
