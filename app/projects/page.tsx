@@ -229,19 +229,19 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
       description: (
         <>
           <p className="mb-2 text-gray-200">
-            This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPC's, Subnets, Route Tables, Internet Gateways, NAT Gateways and more.
+            This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPCs, Subnets, Route Tables, Internet Gateways, NAT Gateways and more.
           </p>
           <p className="mb-2 text-gray-200">
             <strong>Problem Solved:</strong> Launching an instance through the console is time consuming and prone to errors. Learning to do it with Iac greatly improves efficiency, productivity and reliability.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Architecture:</strong> EC2 instances are launched behind a Load balancer for high availability. Auto Scaling Groups are used to ensure that the instances are always running and can scale up or down based on demand. VPC's, Subnets, Route Tables, Internet Gateways and NAT Gateways are used to ensure that the instances are secure and can communicate with each other.
+            <strong>Architecture:</strong> EC2 instances are launched behind a Load balancer for high availability. Auto Scaling Groups are used to ensure that the instances are always running and can scale up or down based on demand. VPCs, Subnets, Route Tables, Internet Gateways and NAT Gateways are used to ensure that the instances are secure and can communicate with each other.
           </p>
           <p className="text-sm text-gray-400 mb-4">
             <strong>Tech Stack:</strong> EC2, VPC, ALB, ASG, Security Groups, Terraform, CDK
           </p>
           <p className="text-gray-300 mt-2">
-            <strong>Full Description:</strong>This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPC's, Subnets, Route Tables, Internet Gateways, NAT Gateways and more. The project tutorials are hosted on Github as mark down files. You can find the link to each project below.
+            <strong>Full Description:</strong>This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPCs, Subnets, Route Tables, Internet Gateways, NAT Gateways and more. The project tutorials are hosted on Github as mark down files. You can find the link to each project below.
             <br /><br />
             <div className="flex-1 flex justify-center">
                   <Image
