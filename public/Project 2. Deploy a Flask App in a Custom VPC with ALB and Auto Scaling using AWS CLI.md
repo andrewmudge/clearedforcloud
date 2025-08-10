@@ -477,7 +477,7 @@ aws autoscaling create-auto-scaling-group \
 
 This will create 2 instances automatically and will refresh with new instances anytime their is a failure
 
-![[Pasted image 20250807083051.png]]
+![[ec2-2-1-instances.png]]
 
 ---
 ### 9. Test ALB and ASG Behavior
@@ -503,7 +503,7 @@ Visit the DNS in a browser.
 You should see your Flask response:
 "Hello from Flask on EC2 with ALB and ASG!"
 
-![[Pasted image 20250807082446.png]]
+![[ec2-2-2-hello-world.png]]
 
 ### ### **10. Simulate Failure and Observe Auto Healing
 
@@ -527,7 +527,7 @@ aws elbv2 describe-target-health \
 	--output table
 ```
 
-![[Target Health.png]]
+![[ec2-2-3-target-health.png]]
 
 Choose one instance and terminate using the command below. In this example we terminated i-0eb8ba3584681226b:
 
@@ -543,11 +543,11 @@ watch -n 5 "aws autoscaling describe-auto-scaling-groups --auto-scaling-group-na
 
 
 
-![[Pasted image 20250804070314.png]]
+![[ec2-2-4-asg.png]]
 
-![[Pasted image 20250804070403.png]]
+![[ec2-2-5-asg2.png]]
 
-![[Pasted image 20250804070445.png]]
+![[ec2-2-6-asg3.png]]
 
 ---
 

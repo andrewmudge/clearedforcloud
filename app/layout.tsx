@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Andrew Mudge | Cleared For Cloud",
-  description: "From F-35s to AWS, follow the journey of a cloud architect.",
+  description: "From F-35s to AWS, follow the journey of a aspiring cloud architect.",
 };
 
 export default function RootLayout({
