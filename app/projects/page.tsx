@@ -229,24 +229,25 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
       description: (
         <>
           <p className="mb-2 text-gray-200">
-            This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPCs, Subnets, Route Tables, Internet Gateways, NAT Gateways and more.
+            A comprehensive 5-part project series that progressively builds expertise with EC2 and associated AWS resources. Starting with basic web server deployment and advancing to production-ready containerized applications using industry best practices.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Problem Solved:</strong> Launching an instance through the console is time consuming and prone to errors. Learning to do it with Iac greatly improves efficiency, productivity and reliability.
+            <strong>Problem Solved:</strong> Manual infrastructure deployments through the console are time-consuming, error-prone, and not scalable. This series teaches Infrastructure as Code (IaC) principles, automation, and cloud-native architecture patterns to improve efficiency, reliability, and maintainability.
           </p>
           <p className="mb-2 text-gray-200">
-            <strong>Architecture:</strong> EC2 instances are launched behind a Load balancer for high availability. Auto Scaling Groups are used to ensure that the instances are always running and can scale up or down based on demand. VPCs, Subnets, Route Tables, Internet Gateways and NAT Gateways are used to ensure that the instances are secure and can communicate with each other.
+            <strong>Architecture:</strong> Progresses from single EC2 instances to highly available, auto-scaling Flask applications behind Application Load Balancers. Covers VPC design, private/public subnets, security groups, Auto Scaling Groups, and eventually containerization with ECS Fargate.
           </p>
           <p className="text-sm text-gray-400 mb-4">
-            <strong>Tech Stack:</strong> EC2, VPC, ALB, ASG, Security Groups, Terraform, CDK
+            <strong>Tech Stack:</strong> EC2, VPC, ALB, ASG, Security Groups, Flask, Docker, ECS, Terraform, CloudFormation
           </p>
           <p className="text-gray-300 mt-2">
-            <strong>Full Description:</strong>This is a 5 part project series that will help to gain familiarity with EC2 and associated resources. It will progress throughout the series from theoretical understanding to real world application using industry best practices. By the end of the series you will be familiar with EC2 instances, Flask App Deployment, Auto Scaling Groups, Load Balancers, VPCs, Subnets, Route Tables, Internet Gateways, NAT Gateways and more. The project tutorials are hosted on Github as mark down files. You can find the link to each project below.
+            <strong>Full Description:</strong> This hands-on project series is designed to take you from EC2 basics to production-ready cloud applications. Each project builds upon the previous one, introducing new concepts and best practices used in enterprise environments.
             <br /><br />
+            
             <div className="flex-1 flex justify-center">
                   <Image
                     src="/ec2-project2-architecture.png"
-                    alt="EC2 Project 2 Architecture"
+                    alt="EC2 Project 2 Architecture showing ALB, ASG, and multi-AZ deployment"
                     width={500}
                     height={320}
                     className="rounded shadow-lg object-contain transition-transform duration-300 md:hover:scale-175 z-10"
@@ -254,38 +255,52 @@ link: { url: "http://serverless-booking.s3-website-us-east-1.amazonaws.com/", ta
                   />
                 </div>
             <br /><br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Overview
-            </a>
+            <strong>Project Series Overview</strong> - Start Here
             <br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/1-ec2-web-server.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Part 1 - EC2 Web Server Deployment
+            <a href="/projects/ec2" className="text-red-400 hover:text-red-300 underline">
+              → View Series Overview
             </a>
+            <br /><br />
+            <strong>Project 1: Basic EC2 Web Server</strong> - Deploy and configure a basic NGINX web server on EC2 with proper security configurations. Learn SSH key management, security groups, and basic EC2 operations.
             <br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/1-ec2-web-server.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Part 2 - Flask App CLI Deployment
+            <a href="/projects/ec2/project1" className="text-red-400 hover:text-red-300 underline">
+              → Start Project 1
             </a>
+            <br /><br />
+            <strong>Project 2: Flask App with Load Balancer</strong> - Deploy a scalable Flask application with Application Load Balancer and Auto Scaling Groups. Covers custom VPC creation, multi-AZ deployment, and high availability patterns.
             <br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/3-terraform-infrastructure.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Part 3 - Terraform Infrastructure as Code
+            <a href="/projects/ec2/project2" className="text-red-400 hover:text-red-300 underline">
+              → Start Project 2
             </a>
+            <br /><br />
+            <strong>Project 3: Infrastructure as Code with Terraform</strong> - Recreate Project 2 infrastructure using Terraform for repeatable, version-controlled deployments.
             <br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/4-cdk-deployment.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Part 4 - CDK Deployment Pipeline
+            <a href="/projects/ec2/project3" className="text-red-400 hover:text-red-300 underline">
+              → Start Project 3
             </a>
+            <br /><br />
+            <strong>Project 4: Advanced Networking & Security</strong> - Implement enterprise-grade network architecture with private subnets, bastion hosts, and NAT Gateways.
             <br />
-            <a href="https://github.com/andrewmudge/ec2-projects/blob/main/5-production-best-practices.md" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">
-              Part 5 - Production Best Practices
+            <a href="/projects/ec2/project4" className="text-red-400 hover:text-red-300 underline">
+              → Start Project 4
             </a>
+            <br /><br />
+            <strong>Project 5: Containerization with ECS Fargate</strong> - Modernize the application using Docker containers and AWS ECS with Fargate for serverless container deployment.
+            <br />
+            <a href="/projects/ec2/project5" className="text-red-400 hover:text-red-300 underline">
+              → Start Project 5
+            </a>
+            <br /><br />
+            By completing this series, you&apos;ll have hands-on experience with EC2 instances, VPCs, Load Balancers, Auto Scaling Groups, Infrastructure as Code, container orchestration, and production deployment patterns used in modern cloud architectures.
           </p>
         </>
       ),
-      link: { url: "https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md", target: "_blank" },
+      link: { url: "/projects/ec2", target: "_self" },
       imgSrc: "/ec2-project2-architecture.png",
-      imgAlt: "EC2 Architecture",
+      imgAlt: "EC2 Project Series Architecture",
       year: "2025",
-      techStack: ["EC2", "VPC", "ALB", "ASG", "Security Groups", "Terraform", "CDK"],
-      externalLink: "https://github.com/andrewmudge/ec2-projects/blob/main/EC2-Project-Series-Overview.md",
+      techStack: ["EC2", "VPC", "ALB", "ASG", "Security Groups", "Flask", "Docker", "ECS", "Terraform"],
+      externalLink: "/projects/ec2",
     },
     {
       id: 4,
