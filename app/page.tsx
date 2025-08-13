@@ -214,7 +214,7 @@ export default function Home() {
   {/* Project Card 3 */}
   <div className="border border-red-700 rounded shadow-lg bg-gray-800 text-gray-300 transition duration-300 hover:shadow-2xl hover:border-red-500 hover:bg-gray-700 flex flex-col">
     <div className="p-2">
-      <a href="/projects#3">
+      <a href="/projects/ec2">
         <Image
           src="/ec2-project2-architecture.png"
           alt="VPC Overview"
@@ -225,7 +225,7 @@ export default function Home() {
       </a>
     </div>
     <div className="p-4 flex flex-col justify-center flex-grow">
-      <a href="/projects#3">
+      <a href="/projects/ec2">
         <h3 className="text-xl font-semibold text-red-400 mb-2 hover:underline">EC2 Project Series</h3>
       </a>
       <p>A five part project series that uses a building block approach to learn EC2 concepts. Progressing from manual deployment via CLI to IaC with Terraform and CDK.</p>

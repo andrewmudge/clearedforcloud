@@ -27,16 +27,16 @@ export default function EC2ProjectPage() {
       technologies: ["CloudFormation", "YAML", "IaC", "Parameters"],
       difficulty: "Intermediate",
       href: "/projects/ec2/project3",
-      status: "Pending"
+      status: "Available"
     },
     {
       id: 4,
-      title: "Advanced Networking",
-      description: "Implement advanced networking with private subnets, NAT Gateway, and bastion hosts",
-      technologies: ["VPC", "NAT Gateway", "Route Tables", "Bastion Host"],
+      title: "Infrastructure as Code - CDK",
+      description: "Re-build project 3 using AWS CDK and P2M",
+      technologies: ["VPC", "NAT Gateway", "Route Tables", "CDK"],
       difficulty: "Advanced",
       href: "/projects/ec2/project4",
-      status: "Pending"
+      status: "In Creation"
     },
     {
       id: 5,
